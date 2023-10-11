@@ -13,14 +13,14 @@ import com.intellij.openapi.project.Project
 class LlmProviderFactory {
     private val aiEngine: AIEngines
         get() = AIEngines.values()
-            .find { it.name.lowercase() == AutoDevSettingsState.getInstance().aiEngine.lowercase() } ?: AIEngines.OpenAI
+            .find { it.name.lowercase() == AutoDevSettingsState.getInstance().aiEngine.lowercase() } ?: AIEngines.Custom
 
     fun connector(project: Project): LLMProvider {
         return when (aiEngine) {
-            AIEngines.OpenAI -> project.getService(OpenAIProvider::class.java)
+//            AIEngines.OpenAI -> project.getService(OpenAIProvider::class.java)
             AIEngines.Custom -> project.getService(CustomLLMProvider::class.java)
-            AIEngines.Azure -> project.getService(AzureOpenAIProvider::class.java)
-            AIEngines.XingHuo -> project.getService(XingHuoProvider::class.java)
+//            AIEngines.Azure -> project.getService(AzureOpenAIProvider::class.java)
+//            AIEngines.XingHuo -> project.getService(XingHuoProvider::class.java)
         }
     }
 }

@@ -10,7 +10,7 @@
 
         <applicationConfigurable parentId="tools" instance="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"
                                  id="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"
-                                 displayName="AutoDev"/>
+                                 displayName="CICC-AutoDev"/>
 
         <projectService serviceImplementation="cc.unitmesh.devti.settings.configurable.CoUnitProjectSettingsService"/>
         <projectConfigurable provider="cc.unitmesh.devti.settings.configurable.CoUnitToolConfigurableProvider"
@@ -30,7 +30,7 @@
         <!-- Run Configurations -->
         <programRunner implementation="cc.unitmesh.devti.runconfig.AutoDevCommandRunner"/>
 
-        <toolWindow id="AutoDev"
+        <toolWindow id="CICC-AutoDev"
                     doNotActivateOnStart="true"
                     anchor="right"
                     secondary="true"

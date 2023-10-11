@@ -11,7 +11,7 @@ import com.intellij.openapi.components.BaseState
 import com.intellij.openapi.project.Project
 
 class AutoDevConfigurationType :
-    ConfigurationTypeBase("AutoDevConfiguration", "AutoDev", "AutoDev generator", AutoDevIcons.STORY) {
+    ConfigurationTypeBase("AutoDevConfiguration", "CICC-AutoDev", "AutoDev generator", AutoDevIcons.STORY) {
     val factory: ConfigurationFactory get() = configurationFactories.single()
 
     init {
@@ -28,7 +28,7 @@ class AutoDevConfigurationFactory(type: AutoDevConfigurationType) : Configuratio
     override fun getId(): String = ID
 
     override fun createTemplateConfiguration(project: Project): RunConfiguration =
-        AutoDevConfiguration(project, "AutoDev", this)
+        AutoDevConfiguration(project, "CICC-AutoDev", this)
 
     override fun getOptionsClass(): Class<out BaseState?> = AutoDevConfigurationOptions::class.java
 

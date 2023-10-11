@@ -14,7 +14,7 @@ import com.intellij.ui.content.ContentFactory
 
 class AutoDevToolWindowFactory : ToolWindowFactory, DumbAware {
     object Util {
-        const val id = "AutoDev"
+        const val id = "CICC-AutoDev"
     }
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {

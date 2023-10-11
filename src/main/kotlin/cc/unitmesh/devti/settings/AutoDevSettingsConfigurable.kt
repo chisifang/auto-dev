@@ -10,7 +10,7 @@ class AutoDevSettingsConfigurable : Configurable {
 
     @Nls(capitalization = Nls.Capitalization.Title)
     override fun getDisplayName(): String {
-        return "AutoDev"
+        return "CICC-AutoDev"
     }
 
     override fun getPreferredFocusedComponent(): JComponent? {

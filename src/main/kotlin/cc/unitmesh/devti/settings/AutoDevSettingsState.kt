@@ -18,8 +18,8 @@ class AutoDevSettingsState : PersistentStateComponent<AutoDevSettingsState> {
 
     var aiEngine = DEFAULT_AI_ENGINE
     var customOpenAiHost = ""
-    var customEngineServer = ""
-    var customEngineToken = ""
+    var customEngineServer = "http://10.110.30.55:4040/generate"
+    var customEngineToken = "123456"
     var customPrompts = ""
 
     var xingHuoAppId = ""
@@ -29,7 +29,7 @@ class AutoDevSettingsState : PersistentStateComponent<AutoDevSettingsState> {
     /**
      * should be a json path
      */
-    var customEngineResponseFormat = ""
+    var customEngineResponseFormat = "\$.result.text"
     var language = DEFAULT_HUMAN_LANGUAGE
     var maxTokenLength = MAX_TOKEN_LENGTH.toString()
 
