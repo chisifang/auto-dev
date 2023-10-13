@@ -15,9 +15,10 @@ import com.intellij.psi.PsiNameIdentifierOwner
  * 3. living documentation
  */
 interface LivingDocumentation {
-    val docToolName: String
-
     val forbiddenRules: List<String>
+
+    val parameterTagInstruction: String get() = "use @param tag"
+    val returnTagInstruction: String get() = "use @return tag"
 
     fun startEndString(type: LivingDocumentationType): Pair<String, String>
 

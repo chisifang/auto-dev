@@ -15,8 +15,6 @@ open class LivingDocPromptBuilder(
     open val documentation: LivingDocumentation,
     val type: LivingDocumentationType,
 ) {
-    private val toolName = documentation.docToolName
-
     protected val contextProviders = listOf(
         VariableContextProvider(false, false, false),
         ClassContextProvider(false),
@@ -27,18 +25,40 @@ open class LivingDocPromptBuilder(
         return when (context) {
             is ClassContext -> classInstruction(context)
             is MethodContext -> methodInstruction(context)
+            is VariableContext -> variableInstruction(context)
             else -> null
         }
     }
 
+    private fun variableInstruction(context: VariableContext): String? {
+        if (context.name == null) return null
+        return "Write documentation for given variable " + context.name + "."
+    }
+
     private fun classInstruction(context: ClassContext): String? {
         if (context.name == null) return null
-        return "Write $toolName for given class " + context.name + "."
+        return "Write documentation for given class " + context.name + ". You should just document the class, not the methods."
     }
 
     private fun methodInstruction(context: MethodContext): String? {
         if (context.name == null) return null
-        return "Write $toolName for given method " + context.name + "."
+        var instruction = "Write documentation for given method " + context.name + "."
+        if (context.paramNames.isNotEmpty()) {
+            instruction = """
+                $instruction
+                ${documentation.parameterTagInstruction}
+                """.trimIndent()
+        }
+
+        val returnType = context.returnType
+        if (!returnType.isNullOrEmpty()) {
+            instruction = """
+                $instruction
+                ${documentation.returnTagInstruction}
+                """.trimIndent()
+        }
+
+        return instruction
     }
 
     open fun buildPrompt(project: Project?, target: PsiNameIdentifierOwner, fallbackText: String): String {
@@ -53,11 +73,11 @@ open class LivingDocPromptBuilder(
                         inOutString = llmQueryContext.inputOutputString()
                     }
                 }
+
                 contextInstruction(llmQueryContext)
-            } ?: "Write documentation for given code, no return code."
+            } ?: "Write documentation for given code. "
 
             instruction.append(basicInstruction)
-            instruction.append(documentation.forbiddenRules.joinToString { "\n- $it" })
 
             if (inOutString.isNotEmpty()) {
                 instruction.append("\nCompare this snippet: \n")
@@ -70,11 +90,9 @@ open class LivingDocPromptBuilder(
             val startEndString = documentation.startEndString(type)
             instruction.append("\nYou should start with `${startEndString.first}`\nYou should end with ends with: `${startEndString.second}`\n")
 
-            documentation.forbiddenRules.forEach {
-                instruction.append("- $it\n")
-            }
+            instruction.append(documentation.forbiddenRules.joinToString { "\n- $it" })
 
-            instruction.append("Start your comment here, no code.\n")
+            instruction.append("Start your documentation here, no return code.\n")
             instruction.toString()
         }
     }
