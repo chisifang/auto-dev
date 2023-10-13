@@ -8,7 +8,7 @@ object AutoDevIcons {
     val STORY: Icon = IconLoader.getIcon("/icons/story.svg", AutoDevIcons::class.java)
 
     @JvmField
-    val AI_COPILOT: Icon = IconLoader.getIcon("/icons/ai-copilot.svg", AutoDevIcons::class.java)
+    val AI_COPILOT: Icon = IconLoader.getIcon("/icons/ai-assistant.svg", AutoDevIcons::class.java)
 
     @JvmField
     val Send: Icon = IconLoader.getIcon("/icons/send.svg", AutoDevIcons::class.java)

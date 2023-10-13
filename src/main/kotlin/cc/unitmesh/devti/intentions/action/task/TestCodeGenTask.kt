@@ -87,7 +87,7 @@ class TestCodeGenTask(val request: TestCodeGenRequest) :
         }
 
         val flow: Flow<String> =
-            LlmProviderFactory().connector(request.project).stream(prompter, "")
+            LlmProviderFactory().connector(request.project).stream(prompter, "", ChatActionType.CHAT)
 
         logger<AutoTestThisIntention>().info("Prompt: $prompter")
 

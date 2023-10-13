@@ -1,6 +1,7 @@
 package cc.unitmesh.devti.llms.custom
 
 import cc.unitmesh.devti.custom.CustomPromptConfig
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.gui.chat.ChatRole
 import cc.unitmesh.devti.llms.LLMProvider
 import cc.unitmesh.devti.settings.AutoDevSettingsState
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.logger
 import com.intellij.openapi.project.Project
+import com.intellij.temporary.similar.chunks.SimilarChunksWithPaths
 import com.nfeld.jsonpathkt.JsonPath
 import com.nfeld.jsonpathkt.extension.read
 import com.theokanning.openai.completion.chat.ChatCompletionResult
@@ -65,7 +67,9 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun stream(promptText: String, systemPrompt: String): Flow<String> {
+    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
+        // 不做多轮对话，清空历史对话
+        this.clearMessage();
         messages += Message("user", promptText)
 
         val customRequest = CustomRequest(messages)
@@ -82,7 +86,7 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
                 .readTimeout(timeout)
                 .build()
         val request = builder
-                .url(url)
+                .url(getUrl(action))
                 .post(body)
                 .build()
 
@@ -125,6 +129,35 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
                 close()
             }
         }
+    }
+
+    fun getUrl(action: ChatActionType): String {
+        var path = "/generate"
+        when (action!!) {
+            ChatActionType.EXPLAIN -> {
+                path = "/api/explain"
+            }
+            ChatActionType.REFACTOR -> {
+                path = "/api/explain"
+            }
+            ChatActionType.CODE_COMPLETE -> {
+                path = "/api/complete"
+            }
+            ChatActionType.GENERATE_TEST -> {
+                path = "/api/test"
+            }
+            ChatActionType.CHAT -> {
+                path = "/generate"
+            }
+            ChatActionType.FIX_ISSUE -> {}
+            ChatActionType.GEN_COMMIT_MESSAGE -> {}
+            ChatActionType.CREATE_CHANGELOG -> {}
+            ChatActionType.CUSTOM_COMPLETE -> {}
+            ChatActionType.CUSTOM_ACTION -> {}
+            ChatActionType.COUNIT -> {}
+        }
+
+        return url + path
     }
 
     fun prompt(instruction: String, input: String): String {

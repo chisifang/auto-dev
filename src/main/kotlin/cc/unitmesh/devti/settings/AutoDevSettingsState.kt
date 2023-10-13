@@ -18,7 +18,7 @@ class AutoDevSettingsState : PersistentStateComponent<AutoDevSettingsState> {
 
     var aiEngine = DEFAULT_AI_ENGINE
     var customOpenAiHost = ""
-    var customEngineServer = "http://10.110.30.55:4040/generate"
+    var customEngineServer = "http://10.110.30.55:4040"
     var customEngineToken = "123456"
     var customPrompts = ""
 
