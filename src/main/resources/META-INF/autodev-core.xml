@@ -42,10 +42,10 @@
                            key="notification.group.name"/>
 
 
-        <intentionAction>
-            <className>cc.unitmesh.devti.intentions.AutoDevIntentionHelper</className>
-            <categoryKey>intention.category.llm</categoryKey>
-        </intentionAction>
+<!--        <intentionAction>-->
+<!--            <className>cc.unitmesh.devti.intentions.AutoDevIntentionHelper</className>-->
+<!--            <categoryKey>intention.category.llm</categoryKey>-->
+<!--        </intentionAction>-->
 
 
         <highlightErrorFilter implementation="cc.unitmesh.devti.gui.snippet.error.CodeBlockHighlightErrorFilter"/>
@@ -146,10 +146,10 @@
     </extensions>
 
     <actions>
-        <group id="AutoDevIntentionsActionGroup" class="cc.unitmesh.devti.intentions.IntentionsActionGroup"
-               icon="cc.unitmesh.devti.AutoDevIcons.AI_COPILOT" searchable="false">
-            <add-to-group group-id="ShowIntentionsGroup" relative-to-action="ShowIntentionActions" anchor="after"/>
-        </group>
+<!--        <group id="AutoDevIntentionsActionGroup" class="cc.unitmesh.devti.intentions.IntentionsActionGroup"-->
+<!--               icon="cc.unitmesh.devti.AutoDevIcons.AI_COPILOT" searchable="false">-->
+<!--            <add-to-group group-id="ShowIntentionsGroup" relative-to-action="ShowIntentionActions" anchor="after"/>-->
+<!--        </group>-->
 
         <group id="org.intellij.sdk.action.GroupedActions" popup="true" text="AutoDev Chat" description="AutoDev chat">
             <action id="cc.unitmesh.devti.actions.chat.ChatBotExplainAction"
