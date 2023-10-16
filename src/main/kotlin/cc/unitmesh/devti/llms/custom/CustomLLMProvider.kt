@@ -84,7 +84,7 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
         }
 
         client = client.newBuilder().readTimeout(timeout).build()
-        val request = builder.url(getUrl(action)).post(body).build()
+        val request = builder.url(this.getUrl(action)).post(body).build()
 
         val call = client.newCall(request)
         val emitDone = false
@@ -127,13 +127,10 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
         }
     }
 
-    fun getUrl(action: ChatActionType): String {
+    private fun getUrl(action: ChatActionType): String {
         var path = "/generate"
         when (action!!) {
             ChatActionType.EXPLAIN -> {
-                path = "/api/explain"
-            }
-            ChatActionType.REFACTOR -> {
                 path = "/api/explain"
             }
             ChatActionType.CODE_COMPLETE -> {
@@ -142,8 +139,11 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
             ChatActionType.GENERATE_TEST -> {
                 path = "/api/test"
             }
+            ChatActionType.REFACTOR -> {
+                path = "/api/generate"
+            }
             ChatActionType.CHAT -> {
-                path = "/generate"
+                path = "/api/generate"
             }
             ChatActionType.FIX_ISSUE -> {}
             ChatActionType.GEN_COMMIT_MESSAGE -> {}
