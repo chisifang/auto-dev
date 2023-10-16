@@ -69,10 +69,10 @@ class ChatCodingPanel(private val chatCodingService: ChatCodingService, val disp
 
         progressBar = JProgressBar()
 
-        val actionLink = ActionLink(AutoDevBundle.message("label.submit.issue")) {
-            BrowserUtil.browse("https://github.com/unit-mesh/auto-dev/issues")
-        }
-        actionLink.setExternalLinkIcon()
+//        val actionLink = ActionLink(AutoDevBundle.message("label.submit.issue")) {
+//            BrowserUtil.browse("https://github.com/unit-mesh/auto-dev/issues")
+//        }
+//        actionLink.setExternalLinkIcon()
 
         inputSection = AutoDevInputSection(chatCodingService.project, disposable)
         inputSection.addListener(object : AutoDevInputListener {
@@ -100,9 +100,9 @@ class ChatCodingPanel(private val chatCodingService: ChatCodingService, val disp
                 cell(progressBar).horizontalAlign(HorizontalAlign.FILL)
             }
 
-            row {
-                cell(actionLink).horizontalAlign(HorizontalAlign.RIGHT)
-            }
+//            row {
+//                cell(actionLink).horizontalAlign(HorizontalAlign.RIGHT)
+//            }
 
             row {
                 cell(inputSection).horizontalAlign(HorizontalAlign.FILL)
