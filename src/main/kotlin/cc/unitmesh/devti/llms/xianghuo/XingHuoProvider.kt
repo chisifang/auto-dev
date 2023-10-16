@@ -2,6 +2,7 @@
 
 package cc.unitmesh.devti.llms.xianghuo
 
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.llms.LLMProvider
 import cc.unitmesh.devti.settings.AutoDevSettingsState
 import com.intellij.openapi.components.Service
@@ -55,7 +56,7 @@ class XingHuoProvider(val project: Project) : LLMProvider {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun stream(promptText: String, systemPrompt: String): Flow<String> {
+    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
         return callbackFlow {
             val client = OkHttpClient()
             client.newWebSocket(request, MyListener(this, onSocketOpen = {

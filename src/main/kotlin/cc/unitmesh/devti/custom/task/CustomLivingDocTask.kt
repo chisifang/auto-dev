@@ -1,6 +1,7 @@
 package cc.unitmesh.devti.custom.task
 
 import cc.unitmesh.devti.custom.CustomDocumentationConfig
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.llms.LlmProviderFactory
 import cc.unitmesh.devti.provider.LivingDocumentation
 import com.intellij.openapi.diagnostic.logger
@@ -31,7 +32,7 @@ class CustomLivingDocTask(
         logger.warn("Prompt: $prompt")
 
         val stream =
-            LlmProviderFactory().connector(project).stream(prompt, "")
+            LlmProviderFactory().connector(project).stream(prompt, "", ChatActionType.CHAT)
 
         var result = ""
 

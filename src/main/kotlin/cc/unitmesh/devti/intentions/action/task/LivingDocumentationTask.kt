@@ -4,6 +4,7 @@ import cc.unitmesh.devti.AutoDevBundle
 import cc.unitmesh.devti.llms.LlmProviderFactory
 import cc.unitmesh.devti.provider.LivingDocumentation
 import cc.unitmesh.devti.custom.LivingDocumentationType
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import com.intellij.openapi.diagnostic.logger
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.progress.ProgressIndicator
@@ -28,7 +29,7 @@ class LivingDocumentationTask(
         logger.info("Prompt: $prompt")
 
         val stream =
-            LlmProviderFactory().connector(project).stream(prompt, "")
+            LlmProviderFactory().connector(project).stream(prompt, "", ChatActionType.CHAT)
 
         var result = ""
 

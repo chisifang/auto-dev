@@ -11,7 +11,7 @@ class PromptTemplateTest {
     @Test
     fun should_fill_story_detail() {
         val promptTemplate = PromptTemplate()
-        val projectInfo = SimpleProjectInfo("", "AutoDev", "description")
+        val projectInfo = SimpleProjectInfo("", "CodeAssistant", "description")
         val story = "story information"
 
         val result = promptTemplate.storyDetail(projectInfo, story)

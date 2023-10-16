@@ -1,6 +1,7 @@
 package cc.unitmesh.devti.llms.azure
 
 import cc.unitmesh.devti.custom.CustomPromptConfig
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.gui.chat.ChatRole
 import cc.unitmesh.devti.llms.LLMProvider
 import cc.unitmesh.devti.settings.AutoDevSettingsState
@@ -112,7 +113,7 @@ class AzureOpenAIProvider(val project: Project) : LLMProvider {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun stream(promptText: String, systemPrompt: String): Flow<String> {
+    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
         val promptText1 = "$promptText\n${""}"
         val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText1)
         if (historyMessageLength > 8192) {

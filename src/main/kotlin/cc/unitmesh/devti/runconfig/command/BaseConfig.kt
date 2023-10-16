@@ -1,5 +1,5 @@
 package cc.unitmesh.devti.runconfig.command
 
 abstract class BaseConfig {
-    open val configurationName: String = "AutoDev"
+    open val configurationName: String = "CodeAssistant"
 }

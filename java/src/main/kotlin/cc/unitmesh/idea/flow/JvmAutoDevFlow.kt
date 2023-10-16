@@ -4,6 +4,7 @@ import cc.unitmesh.devti.AutoDevBundle
 import cc.unitmesh.devti.context.model.DtClass
 import cc.unitmesh.devti.flow.kanban.Kanban
 import cc.unitmesh.devti.flow.model.SimpleStory
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.prompting.code.TargetEndpoint
 import cc.unitmesh.devti.gui.chat.ChatCodingPanel
 import cc.unitmesh.devti.llms.LLMProvider
@@ -289,7 +290,7 @@ class JvmAutoDevFlow : DevFlowProvider() {
         ui.addMessage(AutoDevBundle.message("devti.loading"))
 
         return runBlocking {
-            val prompt = connector.stream(promptText, "")
+            val prompt = connector.stream(promptText, "", ChatActionType.CHAT)
             return@runBlocking ui.updateMessage(prompt)
         }
     }
