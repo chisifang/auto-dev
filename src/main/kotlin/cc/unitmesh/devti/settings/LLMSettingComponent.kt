@@ -15,12 +15,12 @@ import javax.swing.JPanel
 class LLMSettingComponent(private val settings: AutoDevSettingsState) {
 
     // 以下 LLMParam 变量不要改名，因为这些变量名会被用作配置文件的 key
-    private val languageParam by LLMParam.creating { ComboBox(settings.language, HUMAN_LANGUAGES.toList()) }
+//    private val languageParam by LLMParam.creating { ComboBox(settings.language, HUMAN_LANGUAGES.toList()) }
     private val aiEngineParam by LLMParam.creating(onChange = { onSelectedEngineChanged() }) {
         ComboBox(settings.aiEngine, AIEngines.values().toList().map { it.name })
     }
-    private val delaySecondsParam by LLMParam.creating { Editable(settings.delaySeconds) }
-    private val maxTokenLengthParam by LLMParam.creating { Editable(settings.maxTokenLength) }
+//    private val delaySecondsParam by LLMParam.creating { Editable(settings.delaySeconds) }
+//    private val maxTokenLengthParam by LLMParam.creating { Editable(settings.maxTokenLength) }
 //    private val openAIModelsParam by LLMParam.creating { ComboBox(settings.openAiModel, OPENAI_MODEL.toList()) }
 //    private val openAIKeyParam by LLMParam.creating { Password(settings.openAiKey) }
 //    private val customOpenAIHostParam: LLMParam by LLMParam.creating { Editable(settings.customOpenAiHost) }
@@ -38,29 +38,29 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
     private val customEngineResponseFormatParam by LLMParam.creating { Editable(settings.customEngineResponseFormat) }
 
 
-    val project = ProjectManager.getInstance().openProjects.firstOrNull()
-    private val customEnginePrompt by lazy {
-        object : LanguageTextField(JsonLanguage.INSTANCE, project, settings.customPrompts) {
-            override fun createEditor(): EditorEx {
-
-                return super.createEditor().apply {
-                    setShowPlaceholderWhenFocused(true)
-                    setHorizontalScrollbarVisible(false)
-                    setVerticalScrollbarVisible(true)
-                    setPlaceholder(AutoDevBundle.message("autodev.custom.prompt.placeholder"))
-
-
-                    val scheme = EditorColorsUtil.getColorSchemeForBackground(this.colorsScheme.defaultBackground)
-                    this.colorsScheme = this.createBoundColorSchemeDelegate(scheme)
-                }
-            }
-        }.apply {
-            val metrics: FontMetrics = getFontMetrics(font)
-            val columnWidth = metrics.charWidth('m')
-            setOneLineMode(false)
-            preferredSize = Dimension(25 * columnWidth, 25 * metrics.height)
-        }
-    }
+//    val project = ProjectManager.getInstance().openProjects.firstOrNull()
+//    private val customEnginePrompt by lazy {
+//        object : LanguageTextField(JsonLanguage.INSTANCE, project, settings.customPrompts) {
+//            override fun createEditor(): EditorEx {
+//
+//                return super.createEditor().apply {
+//                    setShowPlaceholderWhenFocused(true)
+//                    setHorizontalScrollbarVisible(false)
+//                    setVerticalScrollbarVisible(true)
+//                    setPlaceholder(AutoDevBundle.message("autodev.custom.prompt.placeholder"))
+//
+//
+//                    val scheme = EditorColorsUtil.getColorSchemeForBackground(this.colorsScheme.defaultBackground)
+//                    this.colorsScheme = this.createBoundColorSchemeDelegate(scheme)
+//                }
+//            }
+//        }.apply {
+//            val metrics: FontMetrics = getFontMetrics(font)
+//            val columnWidth = metrics.charWidth('m')
+//            setOneLineMode(false)
+//            preferredSize = Dimension(25 * columnWidth, 25 * metrics.height)
+//        }
+//    }
 
     val llmGroups = mapOf<AIEngines, List<LLMParam>>(
 //        AIEngines.Azure to listOf(
@@ -142,12 +142,12 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
         }
 
         formBuilder
-            .addLLMParam(languageParam)
+//            .addLLMParam(languageParam)
             .addSeparator()
-            .addTooltip("For Custom LLM, config Custom Engine Server & Custom Engine Token & Custom Response Format")
+            .addTooltip("Custom LLM Config")
             .addLLMParam(aiEngineParam)
-            .addLLMParam(maxTokenLengthParam)
-            .addLLMParam(delaySecondsParam)
+//            .addLLMParam(maxTokenLengthParam)
+//            .addLLMParam(delaySecondsParam)
             .addSeparator()
 //            .addTooltip("Select Git Type")
 //            .addLLMParam(gitTypeParam)
@@ -160,7 +160,7 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
             .addLLMParams(currentLLMParams)
             .addVerticalGap(2)
             .addSeparator()
-            .addLabeledComponent(JBLabel("Custom Engine Prompt (Json): "), customEnginePrompt, 1, true)
+//            .addLabeledComponent(JBLabel("Custom Engine Prompt (Json): "), customEnginePrompt, 1, true)
             .addComponentFillVertically(JPanel(), 0)
             .panel
 
@@ -170,7 +170,7 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
 
     private fun updateParams(settings: AutoDevSettingsState) {
         settings.apply {
-            maxTokenLengthParam.value = maxTokenLength
+//            maxTokenLengthParam.value = maxTokenLength
 //            gitTypeParam.value = gitType
 //            gitHubTokenParam.value = githubToken
 //            gitLabTokenParam.value = gitlabToken
@@ -183,17 +183,17 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
 //            xingHuoAppIDParam.value = xingHuoAppId
 //            xingHuoApiKeyParam.value = xingHuoApiKey
 //            xingHuoApiSecretParam.value = xingHuoApiSecrect
-            languageParam.value = language
+//            languageParam.value = language
             aiEngineParam.value = aiEngine
-            customEnginePrompt.text = customPrompts
+//            customEnginePrompt.text = customPrompts
             customEngineResponseFormatParam.value = customEngineResponseFormat
-            delaySecondsParam.value = delaySeconds
+//            delaySecondsParam.value = delaySeconds
         }
     }
 
     fun exportSettings(destination: AutoDevSettingsState) {
         destination.apply {
-            maxTokenLength = maxTokenLengthParam.value
+//            maxTokenLength = maxTokenLengthParam.value
 //            gitType = gitTypeParam.value
 //            githubToken = gitHubTokenParam.value
 //            gitlabUrl = gitLabUrlParam.value
@@ -204,18 +204,20 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
 //            xingHuoAppId = xingHuoAppIDParam.value
 //            xingHuoApiKey = xingHuoApiKeyParam.value
             aiEngine = aiEngineParam.value
-            language = languageParam.value
+//            language = languageParam.value
             customEngineServer = customEngineServerParam.value
             customEngineToken = customEngineTokenParam.value
-            customPrompts = customEnginePrompt.text
+//            customPrompts = customEnginePrompt.text
 //            openAiModel = openAIModelsParam.value
             customEngineResponseFormat = customEngineResponseFormatParam.value
-            delaySeconds = delaySecondsParam.value
+//            delaySeconds = delaySecondsParam.value
         }
     }
 
     fun isModified(settings: AutoDevSettingsState): Boolean {
-        return settings.maxTokenLength != maxTokenLengthParam.value ||
+        return settings.aiEngine != aiEngineParam.value ||
+//                settings.delaySeconds != delaySecondsParam.value ||
+//                settings.maxTokenLength != maxTokenLengthParam.value ||
 //                settings.gitType != gitTypeParam.value ||
 //                settings.githubToken != gitHubTokenParam.value ||
 //                settings.gitlabUrl != gitLabUrlParam.value ||
@@ -224,15 +226,13 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
 //                settings.xingHuoApiSecrect != xingHuoApiSecretParam.value ||
 //                settings.xingHuoAppId != xingHuoAppIDParam.value ||
 //                settings.xingHuoApiKey != xingHuoApiKeyParam.value ||
-                settings.aiEngine != aiEngineParam.value ||
-                settings.language != languageParam.value ||
+//                settings.language != languageParam.value ||
                 settings.customEngineServer != customEngineServerParam.value ||
                 settings.customEngineToken != customEngineTokenParam.value ||
-                settings.customPrompts != customEnginePrompt.text ||
+//                settings.customPrompts != customEnginePrompt.text ||
 //                settings.openAiModel != openAIModelsParam.value ||
 //                settings.customOpenAiHost != customOpenAIHostParam.value ||
-                settings.customEngineResponseFormat != customEngineResponseFormatParam.value ||
-                settings.delaySeconds != delaySecondsParam.value
+                settings.customEngineResponseFormat != customEngineResponseFormatParam.value
     }
 
     init {

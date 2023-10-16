@@ -151,24 +151,30 @@
 <!--            <add-to-group group-id="ShowIntentionsGroup" relative-to-action="ShowIntentionActions" anchor="after"/>-->
 <!--        </group>-->
 
-        <group id="org.intellij.sdk.action.GroupedActions" popup="true" text="AutoDev Chat" description="AutoDev chat">
+        <group id="org.intellij.sdk.action.GroupedActions" popup="true" text="Code Assistant" description="AutoDev chat">
             <action id="cc.unitmesh.devti.actions.chat.ChatBotExplainAction"
-                    class="cc.unitmesh.devti.actions.chat.ChatBotExplainAction" text="Explain This"
+                    class="cc.unitmesh.devti.actions.chat.ChatBotExplainAction" text="解释选中代码"
                     description="Ask AI about this code">
             </action>
 
-            <action id="cc.unitmesh.devti.actions.chat.ChatBotRefactorAction"
-                    class="cc.unitmesh.devti.actions.chat.ChatBotRefactorAction" text="Refactor This"
-                    description="Ask AI refactor this code">
+<!--            <action id="cc.unitmesh.devti.actions.chat.ChatBotRefactorAction"-->
+<!--                    class="cc.unitmesh.devti.actions.chat.ChatBotRefactorAction" text="Refactor This"-->
+<!--                    description="Ask AI refactor this code">-->
+<!--            </action>-->
+
+            <!-- 新增功能 -->
+            <action id="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction"
+                    class="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction" text="代码补全"
+                    description="Ask AI about this code">
             </action>
 
-            <action id="cc.unitmesh.devti.actions.chat.ChatWithThisAction"
-                    class="cc.unitmesh.devti.actions.chat.ChatWithThisAction" text="Chat with This"
-                    description="Ask AI chat with this code">
-            </action>
+<!--            <action id="cc.unitmesh.devti.actions.chat.ChatWithThisAction"-->
+<!--                    class="cc.unitmesh.devti.actions.chat.ChatWithThisAction" text="Chat with This"-->
+<!--                    description="Ask AI chat with this code">-->
+<!--            </action>-->
 
             <action id="cc.unitmesh.devti.actions.chat.GenerateTestAction"
-                    class="cc.unitmesh.devti.actions.chat.GenerateTestAction" text="Write Test for This"
+                    class="cc.unitmesh.devti.actions.chat.GenerateTestAction" text="生成单测"
                     description="Ask AI write this code">
             </action>
 
@@ -197,12 +203,12 @@
             <add-to-group group-id="Vcs.Log.ContextMenu" relative-to-action="Vcs.ShowDiffWithLocal" anchor="after"/>
         </action>
 
-        <action id="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction"
-                class="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction" text="Code Complete (AutoDev)"
-                description="Ask AI about this code">
+<!--        <action id="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction"-->
+<!--                class="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction" text="代码补全"-->
+<!--                description="Ask AI about this code">-->
 
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-        </action>
+<!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
+<!--        </action>-->
 
         <group id="AutoDev.ToolWindow.Snippet.Toolbar">
             <action id="AutoDev.ToolWindow.Snippet.LanguageLabelAction"
