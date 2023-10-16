@@ -74,6 +74,10 @@ abstract class ContextPrompter : LazyExtensionInstance<ContextPrompter>() {
     open fun appendAdditionContext(context: String) {}
     open fun displayPrompt(): String = ""
     open fun requestPrompt(): String = ""
+    open fun getActionType(): ChatActionType? {
+        return action
+    }
+
 
     companion object {
         private val EP_NAME: ExtensionPointName<ContextPrompter> =

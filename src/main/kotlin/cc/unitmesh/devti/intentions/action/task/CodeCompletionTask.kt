@@ -5,6 +5,7 @@ import com.intellij.temporary.similar.chunks.SimilarChunksWithPaths
 import cc.unitmesh.devti.llms.LlmProviderFactory
 import cc.unitmesh.devti.LLMCoroutineScope
 import cc.unitmesh.devti.InsertUtil
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.intentions.action.CodeCompletionIntention
 import com.intellij.lang.LanguageCommenters
 import com.intellij.openapi.actionSystem.CustomShortcutSet
@@ -36,7 +37,7 @@ class CodeCompletionTask(private val request: CodeCompletionRequest) :
     override fun run(indicator: ProgressIndicator) {
         val prompt = promptText()
 
-        val flow: Flow<String> = LLMProviderFactory.connector(request.project).stream(prompt, "")
+        val flow: Flow<String> = LLMProviderFactory.connector(request.project).stream(prompt, "", ChatActionType.CHAT)
         logger.info("Prompt: $prompt")
 
         DumbAwareAction.create {

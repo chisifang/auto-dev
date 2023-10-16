@@ -3,6 +3,7 @@ package cc.unitmesh.devti.counit
 import cc.unitmesh.devti.LLMCoroutineScope
 import cc.unitmesh.devti.counit.dto.ExplainQuery
 import cc.unitmesh.devti.counit.dto.QueryResult
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.gui.chat.ChatCodingPanel
 import cc.unitmesh.devti.gui.chat.ChatContext
 import cc.unitmesh.devti.gui.chat.ChatRole
@@ -50,7 +51,7 @@ class CoUnitPreProcessor(val project: Project) {
         LLMCoroutineScope.scope(project).launch {
             llmProvider.appendLocalMessage(response, ChatRole.User)
 
-            val intentionFlow = llmProvider.stream(response, "")
+            val intentionFlow = llmProvider.stream(response, "", ChatActionType.CHAT)
             val result = ui.updateMessage(intentionFlow)
 
             llmProvider.appendLocalMessage(result, ChatRole.Assistant)

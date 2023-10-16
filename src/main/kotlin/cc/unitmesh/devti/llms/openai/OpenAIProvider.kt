@@ -1,5 +1,6 @@
 package cc.unitmesh.devti.llms.openai
 
+import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.gui.chat.ChatRole
 import cc.unitmesh.devti.llms.LLMProvider
 import cc.unitmesh.devti.settings.AutoDevSettingsState
@@ -84,7 +85,7 @@ class OpenAIProvider(val project: Project) : LLMProvider {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun stream(promptText: String, systemPrompt: String): Flow<String> {
+    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
         val completionRequest = prepareRequest(promptText, systemPrompt)
 
         return callbackFlow {

@@ -65,20 +65,21 @@ open class JavaContextPrompter : ContextPrompter() {
 
     override fun requestPrompt(): String {
         return runBlocking {
-            val instruction = createPrompt(selectedText)
-            val chatContext = collectionContext(creationContext)
-
-            var finalPrompt = instruction
-
-            if (chatContext.isNotEmpty()) {
-                finalPrompt += "\n$chatContext"
-            }
-
-            if (additionContext.isNotEmpty()) {
-                finalPrompt += "\n$additionContext"
-            }
-
-            finalPrompt += "```$lang\n$selectedText\n```"
+//            val instruction = createPrompt(selectedText)
+//            val chatContext = collectionContext(creationContext)
+//
+//            var finalPrompt = instruction
+//
+//            if (chatContext.isNotEmpty()) {
+//                finalPrompt += "\n$chatContext"
+//            }
+//
+//            if (additionContext.isNotEmpty()) {
+//                finalPrompt += "\n$additionContext"
+//            }
+//
+//            finalPrompt += "```$lang\n$selectedText\n```"
+            val finalPrompt = "```$lang\n$selectedText\n```"
 
             println("final prompt: $finalPrompt")
             logger.info("final prompt: $finalPrompt")
