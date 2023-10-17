@@ -1,14 +1,14 @@
 <idea-plugin package="cc.unitmesh" xmlns:xi="http://www.w3.org/2001/XInclude" allow-bundled-update="true">
-    <id>cc.unitmesh.comp</id>
+    <id>com.code.assistant.ctie.dev</id>
     <name>CodeAssistant</name>
-    <vendor>jiuzhang</vendor>
+    <vendor>ctie</vendor>
 
     <description><![CDATA[
         CodeAssistant
     ]]></description>
 
     <change-notes><![CDATA[
-        todo
+        CodeAssistant
     ]]>
     </change-notes>
 

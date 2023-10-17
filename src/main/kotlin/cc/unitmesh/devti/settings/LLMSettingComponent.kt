@@ -143,12 +143,12 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
 
         formBuilder
 //            .addLLMParam(languageParam)
-            .addSeparator()
-            .addTooltip("Custom LLM Config")
+//            .addSeparator()
+//            .addTooltip("Custom LLM Config")
             .addLLMParam(aiEngineParam)
 //            .addLLMParam(maxTokenLengthParam)
 //            .addLLMParam(delaySecondsParam)
-            .addSeparator()
+//            .addSeparator()
 //            .addTooltip("Select Git Type")
 //            .addLLMParam(gitTypeParam)
 //            .addTooltip("GitHub Token is for AutoCRUD Model")
@@ -156,10 +156,10 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
 //            .addTooltip("GitLab options is for AutoCRUD Model")
 //            .addLLMParam(gitLabUrlParam)
 //            .addLLMParam(gitLabTokenParam)
-//            .addSeparator()
+            .addSeparator()
             .addLLMParams(currentLLMParams)
             .addVerticalGap(2)
-            .addSeparator()
+//            .addSeparator()
 //            .addLabeledComponent(JBLabel("Custom Engine Prompt (Json): "), customEnginePrompt, 1, true)
             .addComponentFillVertically(JPanel(), 0)
             .panel

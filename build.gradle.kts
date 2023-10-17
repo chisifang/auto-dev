@@ -51,7 +51,7 @@ fun prop(name: String): String =
     extra.properties[name] as? String
         ?: error("Property `$name` is not defined in gradle.properties")
 
-val basePluginArchiveName = "intellij-autodev"
+val basePluginArchiveName = "intellij-codeAssistant"
 
 val javaScriptPlugins = listOf("JavaScript")
 val pycharmPlugins = listOf("PythonCore")
@@ -164,8 +164,8 @@ allprojects {
 changelog {
     version.set(properties("pluginVersion"))
     groups.empty()
-    path.set(rootProject.file("CHANGELOG.md").toString())
-    repositoryUrl.set(properties("pluginRepositoryUrl"))
+//    path.set(rootProject.file("CHANGELOG.md").toString())
+//    repositoryUrl.set(properties("pluginRepositoryUrl"))
 }
 
 
@@ -281,30 +281,30 @@ project(":plugin") {
             // jvmArgs("-Didea.ProcessCanceledException=disabled")
         }
 
-        withType<PatchPluginXmlTask> {
-            pluginDescription.set(provider { file("description.html").readText() })
-
-            changelog {
-                version.set(properties("pluginVersion"))
-                groups.empty()
-                path.set(rootProject.file("CHANGELOG.md").toString())
-                repositoryUrl.set(properties("pluginRepositoryUrl"))
-            }
-
-            val changelog = project.changelog
-            // Get the latest available change notes from the changelog file
-            changeNotes.set(properties("pluginVersion").map { pluginVersion ->
-                with(changelog) {
-                    renderItem(
-                        (getOrNull(pluginVersion) ?: getUnreleased())
-                            .withHeader(false)
-                            .withEmptySections(false),
-
-                        Changelog.OutputType.HTML,
-                    )
-                }
-            });
-        }
+//        withType<PatchPluginXmlTask> {
+//            pluginDescription.set(provider { file("description.html").readText() })
+//
+//            changelog {
+//                version.set(properties("pluginVersion"))
+//                groups.empty()
+//                path.set(rootProject.file("CHANGELOG.md").toString())
+//                repositoryUrl.set(properties("pluginRepositoryUrl"))
+//            }
+//
+//            val changelog = project.changelog
+//            // Get the latest available change notes from the changelog file
+//            changeNotes.set(properties("pluginVersion").map { pluginVersion ->
+//                with(changelog) {
+//                    renderItem(
+//                        (getOrNull(pluginVersion) ?: getUnreleased())
+//                            .withHeader(false)
+//                            .withEmptySections(false),
+//
+//                        Changelog.OutputType.HTML,
+//                    )
+//                }
+//            });
+//        }
 
         withType<PublishPluginTask> {
             dependsOn("patchChangelog")
