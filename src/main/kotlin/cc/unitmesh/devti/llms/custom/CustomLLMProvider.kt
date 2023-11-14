@@ -4,12 +4,11 @@ import cc.unitmesh.devti.custom.CustomPromptConfig
 import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.gui.chat.ChatRole
 import cc.unitmesh.devti.llms.LLMProvider
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.logger
 import com.intellij.openapi.project.Project
-import com.intellij.temporary.similar.chunks.SimilarChunksWithPaths
 import com.nfeld.jsonpathkt.JsonPath
 import com.nfeld.jsonpathkt.extension.read
 import com.theokanning.openai.completion.chat.ChatCompletionResult
@@ -39,13 +38,13 @@ data class CustomRequest(val messages: List<Message>)
 
 @Service(Service.Level.PROJECT)
 class CustomLLMProvider(val project: Project) : LLMProvider {
-    private val autoDevSettingsState = AutoDevSettingsState.getInstance()
-    private val url get() = autoDevSettingsState.customEngineServer
-    private val key get() = autoDevSettingsState.customEngineToken
-    private val engineFormat get() = autoDevSettingsState.customEngineResponseFormat
+    private val autoDevSettingsStateNew = AutoDevSettingsStateNew.getInstance()
+    private val url get() = autoDevSettingsStateNew.customEngineServer
+    private val key get() = autoDevSettingsStateNew.customEngineToken
+    private val engineFormat get() = autoDevSettingsStateNew.customEngineResponseFormat
     private val customPromptConfig: CustomPromptConfig?
         get() {
-            val prompts = autoDevSettingsState.customPrompts
+            val prompts = autoDevSettingsStateNew.customPrompts
             return CustomPromptConfig.tryParse(prompts)
         }
     private var client = OkHttpClient()

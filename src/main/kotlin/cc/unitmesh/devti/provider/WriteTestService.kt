@@ -67,7 +67,7 @@ abstract class WriteTestService : LazyExtensionInstance<WriteTestService>() {
     companion object {
         val log = logger<WriteTestService>()
         private val EP_NAME: ExtensionPointName<WriteTestService> =
-            ExtensionPointName.create("cc.unitmesh.testContextProvider")
+            ExtensionPointName.create("cc.unitmesh.testContextProviderNew")
 
         fun context(psiElement: PsiElement): WriteTestService? {
             val lang = psiElement.language.displayName.lowercase()

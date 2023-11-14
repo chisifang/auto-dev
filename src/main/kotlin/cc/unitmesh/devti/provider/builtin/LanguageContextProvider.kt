@@ -4,7 +4,7 @@ import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.provider.context.ChatContextItem
 import cc.unitmesh.devti.provider.context.ChatContextProvider
 import cc.unitmesh.devti.provider.context.ChatCreationContext
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.intellij.openapi.project.Project
 
 class LanguageContextProvider : ChatContextProvider {
@@ -13,7 +13,7 @@ class LanguageContextProvider : ChatContextProvider {
     }
 
     override suspend fun collect(project: Project, creationContext: ChatCreationContext): List<ChatContextItem> {
-        val language = AutoDevSettingsState.getInstance().language
+        val language = AutoDevSettingsStateNew.getInstance().language
 
         return listOf(
             ChatContextItem(

@@ -5,29 +5,29 @@
     </dependencies>
 
     <extensions defaultExtensionNs="cc.unitmesh">
-        <classContextBuilder language="Python"
+        <classContextBuilderNew language="Python"
                              implementationClass="cc.unitmesh.pycharm.context.PythonClassContextBuilder"/>
-        <fileContextBuilder language="Python"
+        <fileContextBuilderNew language="Python"
                             implementationClass="cc.unitmesh.pycharm.context.PythonFileContextBuilder"/>
-        <methodContextBuilder language="Python"
+        <methodContextBuilderNew language="Python"
                               implementationClass="cc.unitmesh.pycharm.context.PythonMethodContextBuilder"/>
-        <variableContextBuilder language="Python"
+        <variableContextBuilderNew language="Python"
                                 implementationClass="cc.unitmesh.pycharm.context.PythonVariableContextBuilder"/>
 
-        <chatContextProvider implementation="cc.unitmesh.pycharm.PythonFrameworkContextProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.pycharm.PythonFrameworkContextProvider"/>
 
-        <contextPrompter
+        <contextPrompterNew
                 language="Python"
                 implementation="cc.unitmesh.pycharm.provider.PythonContextPrompter"/>
 
-        <devFlowProvider
+        <devFlowProviderNew
                 language="Python"
                 implementation="cc.unitmesh.pycharm.provider.PythonAutoDevFlow"/>
-        <promptStrategy
+        <promptStrategyNew
                 language="Python"
                 implementation="cc.unitmesh.pycharm.provider.PythonPromptStrategyAdvisor"/>
 
-        <testContextProvider
+        <testContextProviderNew
                 language="Python"
                 implementation="cc.unitmesh.pycharm.provider.PythonWriteTestService"/>
 

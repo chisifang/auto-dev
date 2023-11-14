@@ -8,7 +8,7 @@ import com.intellij.openapi.project.Project
 
 object AutoDevNotifications {
     private fun createNotificationGroup(): NotificationGroup? {
-        return NotificationGroupManager.getInstance().getNotificationGroup("AutoDev.notification.group")
+        return NotificationGroupManager.getInstance().getNotificationGroup("AutoDev.notification.group.new")
     }
 
     fun notify(project: Project, msg: String) {

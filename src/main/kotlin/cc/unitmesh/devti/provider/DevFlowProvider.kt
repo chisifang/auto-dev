@@ -29,7 +29,7 @@ abstract class DevFlowProvider : LazyExtensionInstance<ContextPrompter>() {
 
     companion object {
         private val EP_NAME: ExtensionPointName<DevFlowProvider> =
-            ExtensionPointName.create("cc.unitmesh.devFlowProvider")
+            ExtensionPointName.create("cc.unitmesh.devFlowProviderNew")
 
         fun flowProvider(lang: String): DevFlowProvider? {
             val extensionList = EP_NAME.extensionList

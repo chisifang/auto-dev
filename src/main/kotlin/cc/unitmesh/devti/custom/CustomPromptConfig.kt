@@ -1,6 +1,6 @@
 package cc.unitmesh.devti.custom
 
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.intellij.openapi.diagnostic.logger
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -20,7 +20,7 @@ data class CustomPromptConfig(
         private val logger = logger<CustomPromptConfig>()
 
         fun load(): CustomPromptConfig {
-            val config = tryParse(AutoDevSettingsState.getInstance().customPrompts)
+            val config = tryParse(AutoDevSettingsStateNew.getInstance().customPrompts)
             logger.info("Loaded prompt config: $config")
             return config
         }

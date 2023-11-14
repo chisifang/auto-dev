@@ -18,7 +18,7 @@ class CoUnitToolConfigurable(project: Project) :
     private val pathToToolchainComboBox = CoUnitToolchainPathChoosingComboBox()
     private val serverAddress = JTextField()
 
-    val settings = project.service<CoUnitProjectSettingsService>()
+    val settings = project.service<CoUnitProjectSettingsServiceNew>()
     val state = settings.state.copy()
 
     override fun createPanel(): DialogPanel = panel {

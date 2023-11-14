@@ -6,7 +6,7 @@ import cc.unitmesh.devti.custom.CustomPromptConfig
 import cc.unitmesh.devti.provider.ContextPrompter
 import cc.unitmesh.devti.provider.context.ChatCreationContext
 import cc.unitmesh.devti.provider.context.ChatOrigin
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import cc.unitmesh.idea.MvcUtil
 import cc.unitmesh.idea.flow.MvcContextService
 import com.intellij.openapi.application.runReadAction
@@ -20,7 +20,7 @@ import kotlinx.coroutines.runBlocking
 
 open class JavaContextPrompter : ContextPrompter() {
     private var additionContext: String = ""
-    private val autoDevSettingsState = AutoDevSettingsState.getInstance()
+    private val autoDevSettingsStateNew = AutoDevSettingsStateNew.getInstance()
     private var customPromptConfig: CustomPromptConfig? = null
     private lateinit var mvcContextService: MvcContextService
     private var fileName = ""
@@ -47,7 +47,7 @@ open class JavaContextPrompter : ContextPrompter() {
     }
 
     init {
-        val prompts = autoDevSettingsState.customPrompts
+        val prompts = autoDevSettingsStateNew.customPrompts
         customPromptConfig = CustomPromptConfig.tryParse(prompts)
     }
 

@@ -27,6 +27,6 @@ class AutoDevToolWindowFactory : ToolWindowFactory, DumbAware {
     }
 
     override fun init(toolWindow: ToolWindow) {
-        toolWindow.setTitleActions(listOfNotNull(ActionUtil.getActionGroup("AutoDev.ToolWindow.Chat.TitleActions")))
+        toolWindow.setTitleActions(listOfNotNull(ActionUtil.getActionGroup("AutoDev.ToolWindow.Chat.TitleActionsNew")))
     }
 }

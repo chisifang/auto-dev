@@ -2,8 +2,7 @@ package cc.unitmesh.devti.gui.chat
 
 import cc.unitmesh.devti.AutoDevBundle
 import cc.unitmesh.devti.provider.ContextPrompter
-import cc.unitmesh.devti.settings.AutoDevSettingsState
-import com.intellij.ide.BrowserUtil
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.openapi.ui.NullableComponent
@@ -12,7 +11,6 @@ import com.intellij.openapi.wm.IdeFocusManager
 import com.intellij.temporary.gui.block.whenDisposed
 import com.intellij.ui.Gray
 import com.intellij.ui.JBColor
-import com.intellij.ui.components.ActionLink
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.panels.VerticalLayout
@@ -44,7 +42,7 @@ class ChatCodingPanel(private val chatCodingService: ChatCodingService, val disp
     private var panelContent: DialogPanel
     private val myScrollPane: JBScrollPane
     private val delaySeconds: String
-        get() = AutoDevSettingsState.getInstance().delaySeconds
+        get() = AutoDevSettingsStateNew.getInstance().delaySeconds
 
     init {
         focusMouseListener = object : MouseAdapter() {

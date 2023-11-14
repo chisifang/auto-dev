@@ -5,6 +5,6 @@
     </dependencies>
 
     <extensions defaultExtensionNs="cc.unitmesh">
-        <chatContextProvider implementation="cc.unitmesh.go.provider.GoVersionChatContextProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.go.provider.GoVersionChatContextProvider"/>
     </extensions>
 </idea-plugin>

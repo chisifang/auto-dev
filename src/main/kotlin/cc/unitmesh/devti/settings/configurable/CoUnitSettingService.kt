@@ -3,13 +3,13 @@ package cc.unitmesh.devti.settings.configurable
 import com.intellij.openapi.components.*
 import com.intellij.openapi.project.Project
 
-val Project.coUnitSettings: CoUnitProjectSettingsService
-    get() = service<CoUnitProjectSettingsService>()
+val Project.coUnitSettings: CoUnitProjectSettingsServiceNew
+    get() = service<CoUnitProjectSettingsServiceNew>()
 
 @State(name = "CoUnitProjectSettings", storages = [Storage(StoragePathMacros.WORKSPACE_FILE)])
-class CoUnitProjectSettingsService(
+class CoUnitProjectSettingsServiceNew(
     val project: Project,
-) : SimplePersistentStateComponent<CoUnitProjectSettingsService.CoUnitProjectSettings>(CoUnitProjectSettings()) {
+) : SimplePersistentStateComponent<CoUnitProjectSettingsServiceNew.CoUnitProjectSettings>(CoUnitProjectSettings()) {
     val enableCoUnit: Boolean get() = state.enableCoUnit
     val serverAddress: String get() = state.serverAddress
 

@@ -6,8 +6,8 @@ import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
 
-@State(name = "cc.unitmesh.devti.settings.DevtiSettingsState", storages = [Storage("DevtiSettings.xml")])
-class AutoDevSettingsState : PersistentStateComponent<AutoDevSettingsState> {
+@State(name = "cc.unitmesh.devti.settings.DevtiSettingsStateNew", storages = [Storage("DevtiNewSettings.xml")])
+class AutoDevSettingsStateNew : PersistentStateComponent<AutoDevSettingsStateNew> {
     var gitType = DEFAULT_GIT_TYPE
     var githubToken = ""
     var gitlabToken = ""
@@ -38,20 +38,20 @@ class AutoDevSettingsState : PersistentStateComponent<AutoDevSettingsState> {
     }
 
     @Synchronized
-    override fun getState(): AutoDevSettingsState {
+    override fun getState(): AutoDevSettingsStateNew {
         return this
     }
 
     @Synchronized
-    override fun loadState(state: AutoDevSettingsState) {
+    override fun loadState(state: AutoDevSettingsStateNew) {
         XmlSerializerUtil.copyBean(state, this)
     }
 
     companion object {
         val maxTokenLength: Int get() = getInstance().fetchMaxTokenLength()
 
-        fun getInstance(): AutoDevSettingsState {
-            return ApplicationManager.getApplication().getService(AutoDevSettingsState::class.java).state
+        fun getInstance(): AutoDevSettingsStateNew {
+            return ApplicationManager.getApplication().getService(AutoDevSettingsStateNew::class.java).state
         }
     }
 

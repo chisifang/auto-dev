@@ -22,7 +22,7 @@ interface ChatContextProvider {
     }
 
     companion object {
-        val EP_NAME = ExtensionPointName<ChatContextProvider>("cc.unitmesh.chatContextProvider")
+        val EP_NAME = ExtensionPointName<ChatContextProvider>("cc.unitmesh.chatContextProviderNew")
 
         suspend fun collectChatContextList(
             project: Project,

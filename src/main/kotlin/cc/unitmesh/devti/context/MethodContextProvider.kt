@@ -11,7 +11,7 @@ class MethodContextProvider(private val includeClassContext: Boolean, private va
     LLMCodeContextProvider<PsiElement> {
     @NotNull
     private val languageExtension: LanguageExtension<MethodContextBuilder> =
-        LanguageExtension("cc.unitmesh.methodContextBuilder")
+        LanguageExtension("cc.unitmesh.methodContextBuilderNew")
 
     @NotNull
     private var providers: List<MethodContextBuilder> = emptyList()

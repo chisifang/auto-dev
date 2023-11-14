@@ -5,9 +5,9 @@
     </dependencies>
 
     <extensions defaultExtensionNs="cc.unitmesh">
-        <classContextBuilder language="C#"
+        <classContextBuilderNew language="C#"
                              implementationClass="cc.unitmesh.csharp.context.CsharpClassContextBuilder"/>
 
-        <contextPrompter language="C#" implementation="cc.unitmesh.csharp.provider.CsharpContextPrompter"/>
+        <contextPrompterNew language="C#" implementation="cc.unitmesh.csharp.provider.CsharpContextPrompter"/>
     </extensions>
 </idea-plugin>

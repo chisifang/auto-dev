@@ -4,7 +4,7 @@ package cc.unitmesh.devti.llms.xianghuo
 
 import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.llms.LLMProvider
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import io.ktor.util.*
@@ -24,16 +24,16 @@ import javax.crypto.spec.SecretKeySpec
 
 @Service(Service.Level.PROJECT)
 class XingHuoProvider(val project: Project) : LLMProvider {
-    private val autoDevSettingsState = AutoDevSettingsState.getInstance()
+    private val autoDevSettingsStateNew = AutoDevSettingsStateNew.getInstance()
     private val secrectKey: String
-        get() = autoDevSettingsState.xingHuoApiSecrect
+        get() = autoDevSettingsStateNew.xingHuoApiSecrect
 
 
     private val appid: String
-        get() = autoDevSettingsState.xingHuoAppId
+        get() = autoDevSettingsStateNew.xingHuoAppId
 
     private val apikey: String
-        get() = autoDevSettingsState.xingHuoApiKey
+        get() = autoDevSettingsStateNew.xingHuoApiKey
 
     private val hmacsha256Algorithms = "hmacsha256"
     private val uid = UUID.randomUUID().toString().substring(0, 32)

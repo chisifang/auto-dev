@@ -6,46 +6,46 @@
     </dependencies>
 
     <extensions defaultExtensionNs="cc.unitmesh">
-        <classContextBuilder language="JAVA"
+        <classContextBuilderNew language="JAVA"
                              implementationClass="cc.unitmesh.idea.context.JavaClassContextBuilder"/>
 
-        <methodContextBuilder language="JAVA"
+        <methodContextBuilderNew language="JAVA"
                               implementationClass="cc.unitmesh.idea.context.JavaMethodContextBuilder"/>
 
-        <fileContextBuilder language="JAVA"
+        <fileContextBuilderNew language="JAVA"
                             implementationClass="cc.unitmesh.idea.context.JavaFileContextBuilder"/>
 
-        <variableContextBuilder language="JAVA"
+        <variableContextBuilderNew language="JAVA"
                                 implementationClass="cc.unitmesh.idea.context.JavaVariableContextBuilder"/>
 
-        <codeModifier language="JAVA"
+        <codeModifierNew language="JAVA"
                       implementationClass="cc.unitmesh.idea.context.JavaCodeModifier"/>
-        <livingDocumentation language="JAVA"
+        <livingDocumentationNew language="JAVA"
                              implementationClass="cc.unitmesh.idea.provider.JavaLivingDocumentation"/>
 
-        <chatContextProvider implementation="cc.unitmesh.idea.provider.JavaVersionProvider"/>
-        <chatContextProvider implementation="cc.unitmesh.idea.provider.SpringContextProvider"/>
-        <chatContextProvider implementation="cc.unitmesh.idea.provider.JavaTestContextProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.idea.provider.JavaVersionProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.idea.provider.SpringContextProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.idea.provider.JavaTestContextProvider"/>
 
-        <contextPrompter
+        <contextPrompterNew
                 language="JAVA"
                 implementation="cc.unitmesh.idea.promting.JavaContextPrompter"/>
-        <devFlowProvider
+        <devFlowProviderNew
                 language="JAVA"
                 implementation="cc.unitmesh.idea.flow.JvmAutoDevFlow"/>
-        <promptStrategy
+        <promptStrategyNew
                 language="JAVA"
                 implementation="cc.unitmesh.idea.promting.JvmPromptStrategy"/>
 
-        <testContextProvider
+        <testContextProviderNew
                 language="JAVA"
                 implementation="cc.unitmesh.idea.service.JavaWriteTestService"/>
 
-        <autoDevIntention>
+        <autoDevIntentionNew>
             <className>cc.unitmesh.idea.actions.AutoCrudAction</className>
             <bundleName>messages.AutoDevBundle</bundleName>
             <categoryKey>intention.category.llm</categoryKey>
-        </autoDevIntention>
+        </autoDevIntentionNew>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">

@@ -5,7 +5,7 @@ import com.intellij.lang.Language
 import com.intellij.lang.LanguageExtension
 
 class CodeModifierProvider {
-    private val languageExtension = LanguageExtension<CodeModifier>("cc.unitmesh.codeModifier")
+    private val languageExtension = LanguageExtension<CodeModifier>("cc.unitmesh.codeModifierNew")
     private val providers: List<CodeModifier>
 
     init {

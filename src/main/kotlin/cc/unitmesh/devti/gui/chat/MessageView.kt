@@ -69,7 +69,7 @@ class MessageView(private val message: String, val role: ChatRole, private val d
         val borderLayoutPanel = BorderLayoutPanel()
         borderLayoutPanel.setOpaque(false)
         borderLayoutPanel.addToCenter(this.myNameLabel)
-        val group = ActionUtil.getActionGroup("AutoDev.ToolWindow.Message.Toolbar.Assistant")
+        val group = ActionUtil.getActionGroup("AutoDev.ToolWindow.Message.Toolbar.AssistantNew")
 
         if (group != null) {
             val actionToolbar = ActionToolbarImpl(javaClass.getName(), group, true)

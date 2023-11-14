@@ -30,7 +30,7 @@ interface LivingDocumentation {
 
     companion object {
         private val languageExtension: LanguageExtension<LivingDocumentation> =
-            LanguageExtension("cc.unitmesh.livingDocumentation")
+            LanguageExtension("cc.unitmesh.livingDocumentationNew")
 
         fun forLanguage(language: Language): LivingDocumentation? {
             return languageExtension.forLanguage(language)

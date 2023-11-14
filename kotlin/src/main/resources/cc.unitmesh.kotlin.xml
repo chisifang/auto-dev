@@ -6,32 +6,32 @@
     </dependencies>
 
     <extensions defaultExtensionNs="cc.unitmesh">
-        <codeModifier language="kotlin"
+        <codeModifierNew language="kotlin"
                       implementationClass="cc.unitmesh.kotlin.context.KotlinCodeModifier"/>
 
-        <chatContextProvider implementation="cc.unitmesh.kotlin.provider.KotlinTestContextProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.kotlin.provider.KotlinTestContextProvider"/>
 
-        <livingDocumentation language="kotlin"
+        <livingDocumentationNew language="kotlin"
                              implementationClass="cc.unitmesh.kotlin.provider.KotlinLivingDocumentation"/>
 
-        <classContextBuilder language="kotlin"
+        <classContextBuilderNew language="kotlin"
                              implementationClass="cc.unitmesh.kotlin.context.KotlinClassContextBuilder"/>
 
-        <methodContextBuilder language="kotlin"
+        <methodContextBuilderNew language="kotlin"
                               implementationClass="cc.unitmesh.kotlin.context.KotlinMethodContextBuilder"/>
 
-        <fileContextBuilder language="kotlin"
+        <fileContextBuilderNew language="kotlin"
                             implementationClass="cc.unitmesh.kotlin.context.KotlinFileContextBuilder"/>
 
-        <variableContextBuilder language="kotlin"
+        <variableContextBuilderNew language="kotlin"
                                 implementationClass="cc.unitmesh.kotlin.context.KotlinVariableContextBuilder"/>
 
-        <chatContextProvider implementation="cc.unitmesh.kotlin.provider.KotlinTestContextProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.kotlin.provider.KotlinTestContextProvider"/>
 
-        <contextPrompter
+        <contextPrompterNew
                 language="kotlin"
                 implementation="cc.unitmesh.kotlin.provider.KotlinContextPrompter"/>
-        <testContextProvider
+        <testContextProviderNew
                 language="kotlin"
                 implementation="cc.unitmesh.kotlin.provider.KotlinWriteTestService"/>
     </extensions>

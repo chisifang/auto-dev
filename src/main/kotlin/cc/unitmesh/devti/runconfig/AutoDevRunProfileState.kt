@@ -9,7 +9,7 @@ import cc.unitmesh.devti.llms.LlmProviderFactory
 import cc.unitmesh.devti.provider.DevFlowProvider
 import cc.unitmesh.devti.runconfig.config.AutoDevConfiguration
 import cc.unitmesh.devti.runconfig.options.AutoDevConfigurationOptions
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.intellij.execution.ExecutionResult
 import com.intellij.execution.Executor
 import com.intellij.execution.configurations.RunProfileState
@@ -34,7 +34,7 @@ class AutoDevRunProfileState(
     private val gitlabUrl: String
 
     init {
-        val instance = AutoDevSettingsState.getInstance()
+        val instance = AutoDevSettingsStateNew.getInstance()
         githubToken = instance.githubToken
         gitlabToken = instance.gitlabToken
         gitType = instance.gitType

@@ -164,7 +164,7 @@ class CodeBlockView(
             val editor: EditorEx =
                 createCodeViewerEditor(project, createCodeViewerFile as LightVirtualFile, document, disposable)
 
-            val toolbarActionGroup = ActionUtil.getActionGroup("AutoDev.ToolWindow.Snippet.Toolbar")!!
+            val toolbarActionGroup = ActionUtil.getActionGroup("AutoDev.ToolWindow.Snippet.ToolbarNew")!!
             toolbarActionGroup.let {
                 val toolbar: ActionToolbarImpl =
                     object : ActionToolbarImpl(ActionPlaces.MAIN_TOOLBAR, toolbarActionGroup, true) {

@@ -3,7 +3,7 @@ package cc.unitmesh.devti.llms.openai
 import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.gui.chat.ChatRole
 import cc.unitmesh.devti.llms.LLMProvider
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.diagnostic.logger
@@ -33,7 +33,7 @@ class OpenAIProvider(val project: Project) : LLMProvider {
                 throw IllegalStateException("openAiKey is empty")
             }
 
-            val openAiProxy = AutoDevSettingsState.getInstance().customOpenAiHost
+            val openAiProxy = AutoDevSettingsStateNew.getInstance().customOpenAiHost
             return if (openAiProxy.isEmpty()) {
                 OpenAiService(openAiKey, timeout)
             } else {
@@ -54,12 +54,12 @@ class OpenAIProvider(val project: Project) : LLMProvider {
 
     private val timeout = Duration.ofSeconds(600)
     private val openAiVersion: String
-        get() = AutoDevSettingsState.getInstance().openAiModel
+        get() = AutoDevSettingsStateNew.getInstance().openAiModel
     private val openAiKey: String
-        get() = AutoDevSettingsState.getInstance().openAiKey
+        get() = AutoDevSettingsStateNew.getInstance().openAiKey
 
     private val maxTokenLength: Int
-        get() = AutoDevSettingsState.maxTokenLength
+        get() = AutoDevSettingsStateNew.maxTokenLength
 
     private val messages: MutableList<ChatMessage> = ArrayList()
     private var historyMessageLength: Int = 0

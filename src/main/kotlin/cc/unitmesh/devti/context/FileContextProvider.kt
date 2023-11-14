@@ -8,7 +8,7 @@ import com.intellij.psi.PsiFile
 
 class FileContextProvider: LLMCodeContextProvider<PsiFile> {
     private val languageExtension: LanguageExtension<FileContextBuilder> =
-        LanguageExtension("cc.unitmesh.fileContextBuilder")
+        LanguageExtension("cc.unitmesh.fileContextBuilderNew")
 
     private val providers: List<FileContextBuilder>
 

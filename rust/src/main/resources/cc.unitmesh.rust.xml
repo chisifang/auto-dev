@@ -8,13 +8,13 @@
     </dependencies>
 
     <extensions defaultExtensionNs="cc.unitmesh">
-        <classContextBuilder language="Rust"
+        <classContextBuilderNew language="Rust"
                              implementationClass="cc.unitmesh.rust.context.RustClassContextBuilder"/>
-        <methodContextBuilder language="Rust"
+        <methodContextBuilderNew language="Rust"
                               implementationClass="cc.unitmesh.rust.context.RustMethodContextBuilder"/>
 
-        <contextPrompter language="Rust" implementation="cc.unitmesh.rust.provider.RustContextPrompter"/>
+        <contextPrompterNew language="Rust" implementation="cc.unitmesh.rust.provider.RustContextPrompter"/>
 
-        <chatContextProvider implementation="cc.unitmesh.rust.provider.RustContextProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.rust.provider.RustContextProvider"/>
     </extensions>
 </idea-plugin>

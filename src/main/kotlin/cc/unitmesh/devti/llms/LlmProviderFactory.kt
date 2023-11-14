@@ -1,11 +1,8 @@
 package cc.unitmesh.devti.llms
 
-import cc.unitmesh.devti.llms.azure.AzureOpenAIProvider
 import cc.unitmesh.devti.llms.custom.CustomLLMProvider
-import cc.unitmesh.devti.llms.openai.OpenAIProvider
-import cc.unitmesh.devti.llms.xianghuo.XingHuoProvider
 import cc.unitmesh.devti.settings.AIEngines
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 
@@ -13,7 +10,7 @@ import com.intellij.openapi.project.Project
 class LlmProviderFactory {
     private val aiEngine: AIEngines
         get() = AIEngines.values()
-            .find { it.name.lowercase() == AutoDevSettingsState.getInstance().aiEngine.lowercase() } ?: AIEngines.Custom
+            .find { it.name.lowercase() == AutoDevSettingsStateNew.getInstance().aiEngine.lowercase() } ?: AIEngines.Custom
 
     fun connector(project: Project): LLMProvider {
         return when (aiEngine) {

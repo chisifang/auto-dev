@@ -5,20 +5,20 @@
     <depends>Git4Idea</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <notificationGroup id="AutoDev.notification.group" displayType="STICKY_BALLOON" bundle="messages.AutoDevBundle"
+        <notificationGroup id="AutoDev.notification.group.new" displayType="STICKY_BALLOON" bundle="messages.AutoDevBundle"
                            key="notification.group.name"/>
 
         <applicationConfigurable parentId="tools" instance="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"
-                                 id="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"
+                                 id="cc.unitmesh.devti.settings.AutoDevSettingsConfigurableNew"
                                  displayName="CodeAssistant"/>
 
-        <projectService serviceImplementation="cc.unitmesh.devti.settings.configurable.CoUnitProjectSettingsService"/>
+        <projectService serviceImplementation="cc.unitmesh.devti.settings.configurable.CoUnitProjectSettingsServiceNew"/>
 <!--        <projectConfigurable provider="cc.unitmesh.devti.settings.configurable.CoUnitToolConfigurableProvider"-->
 <!--                             parentId="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"-->
 <!--                             id="cc.unitmesh.counit"-->
 <!--                             bundle="messages.AutoDevBundle" key="settings.external.counit.name"/>-->
 
-        <applicationService serviceImplementation="cc.unitmesh.devti.settings.AutoDevSettingsState"/>
+        <applicationService serviceImplementation="cc.unitmesh.devti.settings.AutoDevSettingsStateNew"/>
 
         <runConfigurationProducer
                 implementation="cc.unitmesh.devti.runconfig.command.AutoDevFeatureConfigurationProducer"/>
@@ -57,92 +57,92 @@
     </extensions>
 
     <extensionPoints>
-        <extensionPoint qualifiedName="cc.unitmesh.autoDevIntention"
+        <extensionPoint qualifiedName="cc.unitmesh.autoDevIntentionNew"
                         beanClass="com.intellij.codeInsight.intention.IntentionActionBean"
                         dynamic="true">
             <with tag="className" implements="com.intellij.codeInsight.intention.IntentionAction"/>
         </extensionPoint>
 
-        <extensionPoint qualifiedName="cc.unitmesh.fileContextBuilder"
+        <extensionPoint qualifiedName="cc.unitmesh.fileContextBuilderNew"
                         beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
             <with attribute="implementationClass"
                   implements="cc.unitmesh.devti.context.builder.FileContextBuilder"/>
         </extensionPoint>
 
-        <extensionPoint qualifiedName="cc.unitmesh.classContextBuilder"
+        <extensionPoint qualifiedName="cc.unitmesh.classContextBuilderNew"
                         beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
             <with attribute="implementationClass"
                   implements="cc.unitmesh.devti.context.builder.ClassContextBuilder"/>
         </extensionPoint>
 
-        <extensionPoint qualifiedName="cc.unitmesh.methodContextBuilder"
+        <extensionPoint qualifiedName="cc.unitmesh.methodContextBuilderNew"
                         beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
             <with attribute="implementationClass"
                   implements="cc.unitmesh.devti.context.builder.MethodContextBuilder"/>
         </extensionPoint>
 
-        <extensionPoint qualifiedName="cc.unitmesh.codeModifier"
+        <extensionPoint qualifiedName="cc.unitmesh.codeModifierNew"
                         beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
             <with attribute="implementationClass"
                   implements="cc.unitmesh.devti.context.builder.CodeModifier"/>
         </extensionPoint>
 
-        <extensionPoint qualifiedName="cc.unitmesh.variableContextBuilder"
+        <extensionPoint qualifiedName="cc.unitmesh.variableContextBuilderNew"
                         beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
             <with attribute="implementationClass"
                   implements="cc.unitmesh.devti.context.builder.VariableContextBuilder"/>
         </extensionPoint>
 
-        <extensionPoint qualifiedName="cc.unitmesh.livingDocumentation"
+        <extensionPoint qualifiedName="cc.unitmesh.livingDocumentationNew"
                         beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
             <with attribute="implementationClass" implements="cc.unitmesh.devti.provider.LivingDocumentation"/>
         </extensionPoint>
 
-        <extensionPoint qualifiedName="cc.unitmesh.devFlowProvider"
+        <extensionPoint qualifiedName="cc.unitmesh.devFlowProviderNew"
                         interface="cc.unitmesh.devti.provider.DevFlowProvider"
                         dynamic="true"/>
 
         <!-- TODO: find better way to share context -->
-        <extensionPoint qualifiedName="cc.unitmesh.contextPrompter"
+        <extensionPoint qualifiedName="cc.unitmesh.contextPrompterNew"
                         interface="cc.unitmesh.devti.provider.ContextPrompter"
                         dynamic="true"/>
 
-        <extensionPoint qualifiedName="cc.unitmesh.promptStrategy"
+        <extensionPoint qualifiedName="cc.unitmesh.promptStrategyNew"
                         interface="cc.unitmesh.devti.provider.PromptStrategy"
                         dynamic="true"/>
 
-        <extensionPoint qualifiedName="cc.unitmesh.testContextProvider"
+        <extensionPoint qualifiedName="cc.unitmesh.testContextProviderNew"
                         interface="cc.unitmesh.devti.provider.WriteTestService"
                         dynamic="true"/>
 
-        <extensionPoint qualifiedName="cc.unitmesh.chatContextProvider"
+        <extensionPoint qualifiedName="cc.unitmesh.chatContextProviderNew"
                         interface="cc.unitmesh.devti.provider.context.ChatContextProvider"
                         dynamic="true"/>
     </extensionPoints>
 
     <extensions defaultExtensionNs="cc.unitmesh">
-        <autoDevIntention>
+        <autoDevIntentionNew>
             <className>cc.unitmesh.devti.intentions.action.NewChatWithCodeIntention</className>
             <bundleName>messages.AutoDevBundle</bundleName>
             <categoryKey>intention.category.llm</categoryKey>
-        </autoDevIntention>
-        <autoDevIntention>
+        </autoDevIntentionNew>
+        <autoDevIntentionNew>
             <className>cc.unitmesh.devti.intentions.action.CodeCompletionIntention</className>
             <bundleName>messages.AutoDevBundle</bundleName>
             <categoryKey>intention.category.llm</categoryKey>
-        </autoDevIntention>
-        <autoDevIntention>
+        </autoDevIntentionNew>
+        <autoDevIntentionNew>
             <className>cc.unitmesh.devti.intentions.action.AutoTestThisIntention</className>
             <bundleName>messages.AutoDevBundle</bundleName>
             <categoryKey>intention.category.llm</categoryKey>
-        </autoDevIntention>
-        <autoDevIntention>
+        </autoDevIntentionNew>
+        <autoDevIntentionNew>
             <className>cc.unitmesh.devti.intentions.action.DefaultDocumentationIntention</className>
             <bundleName>messages.AutoDevBundle</bundleName>
             <categoryKey>intention.category.llm</categoryKey>
-        </autoDevIntention>
+        </autoDevIntentionNew>
 
-        <chatContextProvider implementation="cc.unitmesh.devti.provider.builtin.LanguageContextProvider"/>
+        <chatContextProviderNew implementation="cc.unitmesh.devti.provider.builtin.LanguageContextProvider"/>
     </extensions>
 
     <actions>
@@ -151,8 +151,8 @@
 <!--            <add-to-group group-id="ShowIntentionsGroup" relative-to-action="ShowIntentionActions" anchor="after"/>-->
 <!--        </group>-->
 
-        <group id="org.intellij.sdk.action.GroupedActions" popup="true" text="Code Assistant" description="AutoDev chat">
-            <action id="cc.unitmesh.devti.actions.chat.ChatBotExplainAction"
+        <group id="org.intellij.sdk.action.GroupedActionsNew" popup="true" text="Code Assistant" description="AutoDev chat">
+            <action id="cc.unitmesh.devti.actions.chat.ChatBotExplainActionNew"
                     class="cc.unitmesh.devti.actions.chat.ChatBotExplainAction" text="解释选中代码"
                     description="Ask AI about this code">
             </action>
@@ -163,7 +163,7 @@
 <!--            </action>-->
 
             <!-- 新增功能 -->
-            <action id="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction"
+            <action id="cc.unitmesh.devti.actions.chat.CodeCompleteChatActionNew"
                     class="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction" text="代码补全"
                     description="Ask AI about this code">
             </action>
@@ -173,7 +173,7 @@
 <!--                    description="Ask AI chat with this code">-->
 <!--            </action>-->
 
-            <action id="cc.unitmesh.devti.actions.chat.GenerateTestAction"
+            <action id="cc.unitmesh.devti.actions.chat.GenerateTestActionNew"
                     class="cc.unitmesh.devti.actions.chat.GenerateTestAction" text="生成单测"
                     description="Ask AI write this code">
             </action>
@@ -181,7 +181,7 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
 
-        <action id="cc.unitmesh.devti.actions.console.FixThisAction"
+        <action id="cc.unitmesh.devti.actions.console.FixThisActionNew"
                 class="cc.unitmesh.devti.actions.console.FixThisAction" text="Fix This (AutoDev)"
                 description="Ask AI fi this code">
             <add-to-group group-id="ConsoleEditorPopupMenu" anchor="first"/>
@@ -195,7 +195,7 @@
 <!--            <add-to-group group-id="Vcs.MessageActionGroup"/>-->
 <!--        </action>-->
 
-        <action id="autodev.Vcs.LLMChangelog"
+        <action id="autodev.Vcs.LLMChangelogNew"
                 class="cc.unitmesh.devti.actions.vcs.ReleaseNoteSuggestionAction" text="Generate Release Note (AutoDev)"
                 icon="cc.unitmesh.devti.AutoDevIcons.AI_COPILOT"
                 description="Ask AI generate release note">
@@ -210,21 +210,21 @@
 <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
 <!--        </action>-->
 
-        <group id="AutoDev.ToolWindow.Snippet.Toolbar">
-            <action id="AutoDev.ToolWindow.Snippet.LanguageLabelAction"
+        <group id="AutoDev.ToolWindow.Snippet.ToolbarNew">
+            <action id="AutoDev.ToolWindow.Snippet.LanguageLabelActionNew"
                     class="cc.unitmesh.devti.gui.snippet.AutoDevLanguageLabelAction"/>
 
-            <action id="AutoDev.ToolWindow.Snippet.CopyToClipboard"
+            <action id="AutoDev.ToolWindow.Snippet.CopyToClipboardNew"
                     icon="AllIcons.Actions.Copy"
                     class="cc.unitmesh.devti.gui.snippet.AutoDevCopyToClipboardAction"/>
         </group>
 
-        <group id="AutoDev.ToolWindow.Chat.TitleActions">
-            <action id="AutoDev.ToolWindow.NewChatAction" class="cc.unitmesh.devti.gui.toolbar.NewChatAction"/>
+        <group id="AutoDev.ToolWindow.Chat.TitleActionsNew">
+            <action id="AutoDev.ToolWindow.NewChatActionNew" class="cc.unitmesh.devti.gui.toolbar.NewChatAction"/>
         </group>
 
-        <group id="AutoDev.ToolWindow.Message.Toolbar.Assistant">
-            <action id="AutoDev.ToolWindow.Message.Like"
+        <group id="AutoDev.ToolWindow.Message.Toolbar.AssistantNew">
+            <action id="AutoDev.ToolWindow.Message.LikeNew"
                     class="cc.unitmesh.devti.gui.chat.message.AutoDevRateMessageAction$Like"/>
         </group>
 

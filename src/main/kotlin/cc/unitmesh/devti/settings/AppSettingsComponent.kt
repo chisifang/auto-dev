@@ -23,7 +23,7 @@ import javax.swing.JPanel
  *
  * Only show settings provided and sync settings with current UI presenting
  */
-class AppSettingsComponent(settings: AutoDevSettingsState) {
+class AppSettingsComponent(settings: AutoDevSettingsStateNew) {
     val panel: JPanel
     private val openAiKey = JBPasswordField()
     private val gitType = ComboBox(GIT_TYPE)
@@ -270,7 +270,7 @@ class AppSettingsComponent(settings: AutoDevSettingsState) {
         return delaySeconds.text
     }
 
-    fun isModified(settings: AutoDevSettingsState): Boolean {
+    fun isModified(settings: AutoDevSettingsStateNew): Boolean {
         return settings.openAiKey != getOpenAiKey() ||
                 settings.githubToken != getGithubToken() ||
                 settings.gitType != getGitType() ||
@@ -295,7 +295,7 @@ class AppSettingsComponent(settings: AutoDevSettingsState) {
     /**
      * export settings to [target]
      */
-    fun exportSettings(target: AutoDevSettingsState) {
+    fun exportSettings(target: AutoDevSettingsStateNew) {
         target.apply {
             openAiKey = getOpenAiKey()
             gitType = getGitType()
@@ -321,7 +321,7 @@ class AppSettingsComponent(settings: AutoDevSettingsState) {
     /**
      * apply settings to setting UI
      */
-    fun applySettings(settings: AutoDevSettingsState) {
+    fun applySettings(settings: AutoDevSettingsStateNew) {
         settings.also {
             setOpenAiKey(it.openAiKey)
             setGitType(it.gitType)

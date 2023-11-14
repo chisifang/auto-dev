@@ -44,7 +44,7 @@ class AutoDevIntentionHelper : IntentionAction, Iconable {
 
     companion object {
         val EP_NAME: ExtensionPointName<IntentionActionBean> =
-            ExtensionPointName<IntentionActionBean>("cc.unitmesh.autoDevIntention")
+            ExtensionPointName<IntentionActionBean>("cc.unitmesh.autoDevIntentionNew")
 
         fun getAiAssistantIntentions(project: Project, editor: Editor, file: PsiFile): List<IntentionAction> {
             val extensionList = EP_NAME.extensionList

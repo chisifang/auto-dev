@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable
 import javax.swing.JComponent
 
 class AutoDevSettingsConfigurable : Configurable {
-    private val component: LLMSettingComponent = LLMSettingComponent(AutoDevSettingsState.getInstance())
+    private val component: LLMSettingComponent = LLMSettingComponent(AutoDevSettingsStateNew.getInstance())
 
     @Nls(capitalization = Nls.Capitalization.Title)
     override fun getDisplayName(): String {
@@ -23,15 +23,15 @@ class AutoDevSettingsConfigurable : Configurable {
     }
 
     override fun isModified(): Boolean {
-        val settings: AutoDevSettingsState = AutoDevSettingsState.getInstance()
+        val settings: AutoDevSettingsStateNew = AutoDevSettingsStateNew.getInstance()
         return component.isModified(settings)
     }
 
     override fun apply() {
-        component.exportSettings(AutoDevSettingsState.getInstance())
+        component.exportSettings(AutoDevSettingsStateNew.getInstance())
     }
 
     override fun reset() {
-        component.applySettings(AutoDevSettingsState.getInstance())
+        component.applySettings(AutoDevSettingsStateNew.getInstance())
     }
 }

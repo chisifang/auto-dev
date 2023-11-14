@@ -1,18 +1,10 @@
 package cc.unitmesh.devti.settings
 
-import cc.unitmesh.devti.AutoDevBundle
-import com.intellij.json.JsonLanguage
-import com.intellij.openapi.editor.colors.EditorColorsUtil
-import com.intellij.openapi.editor.ex.EditorEx
-import com.intellij.openapi.project.ProjectManager
-import com.intellij.ui.LanguageTextField
 import com.intellij.ui.components.JBLabel
 import com.intellij.util.ui.FormBuilder
-import java.awt.Dimension
-import java.awt.FontMetrics
 import javax.swing.JPanel
 
-class LLMSettingComponent(private val settings: AutoDevSettingsState) {
+class LLMSettingComponent(private val settings: AutoDevSettingsStateNew) {
 
     // 以下 LLMParam 变量不要改名，因为这些变量名会被用作配置文件的 key
 //    private val languageParam by LLMParam.creating { ComboBox(settings.language, HUMAN_LANGUAGES.toList()) }
@@ -135,7 +127,7 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
     val panel: JPanel get() = formBuilder.panel
 
 
-    fun applySettings(settings: AutoDevSettingsState, updateParams: Boolean = false) {
+    fun applySettings(settings: AutoDevSettingsStateNew, updateParams: Boolean = false) {
         panel.removeAll()
         if (updateParams) {
             updateParams(settings)
@@ -168,7 +160,7 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
         panel.repaint()
     }
 
-    private fun updateParams(settings: AutoDevSettingsState) {
+    private fun updateParams(settings: AutoDevSettingsStateNew) {
         settings.apply {
 //            maxTokenLengthParam.value = maxTokenLength
 //            gitTypeParam.value = gitType
@@ -191,7 +183,7 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
         }
     }
 
-    fun exportSettings(destination: AutoDevSettingsState) {
+    fun exportSettings(destination: AutoDevSettingsStateNew) {
         destination.apply {
 //            maxTokenLength = maxTokenLengthParam.value
 //            gitType = gitTypeParam.value
@@ -214,7 +206,7 @@ class LLMSettingComponent(private val settings: AutoDevSettingsState) {
         }
     }
 
-    fun isModified(settings: AutoDevSettingsState): Boolean {
+    fun isModified(settings: AutoDevSettingsStateNew): Boolean {
         return settings.aiEngine != aiEngineParam.value ||
 //                settings.delaySeconds != delaySecondsParam.value ||
 //                settings.maxTokenLength != maxTokenLengthParam.value ||

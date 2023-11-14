@@ -4,7 +4,7 @@ import cc.unitmesh.devti.custom.CustomPromptConfig
 import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.gui.chat.ChatRole
 import cc.unitmesh.devti.llms.LLMProvider
-import cc.unitmesh.devti.settings.AutoDevSettingsState
+import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.logger
@@ -44,15 +44,15 @@ data class SimpleOpenAIBody(val messages: List<SimpleOpenAIFormat>, val temperat
 class AzureOpenAIProvider(val project: Project) : LLMProvider {
     private val logger = logger<AzureOpenAIProvider>()
 
-    private val autoDevSettingsState = AutoDevSettingsState.getInstance()
-    private val url = autoDevSettingsState.customEngineServer
+    private val autoDevSettingsStateNew = AutoDevSettingsStateNew.getInstance()
+    private val url = autoDevSettingsStateNew.customEngineServer
     private var customPromptConfig: CustomPromptConfig? = null
     private var client = OkHttpClient()
     private val openAiVersion: String
 
     init {
-        val prompts = autoDevSettingsState.customPrompts
-        openAiVersion = AutoDevSettingsState.getInstance().openAiModel
+        val prompts = autoDevSettingsStateNew.customPrompts
+        openAiVersion = AutoDevSettingsStateNew.getInstance().openAiModel
         customPromptConfig = CustomPromptConfig.tryParse(prompts)
     }
 

@@ -81,7 +81,7 @@ abstract class ContextPrompter : LazyExtensionInstance<ContextPrompter>() {
 
     companion object {
         private val EP_NAME: ExtensionPointName<ContextPrompter> =
-            ExtensionPointName.create("cc.unitmesh.contextPrompter")
+            ExtensionPointName.create("cc.unitmesh.contextPrompterNew")
 
         fun prompter(lang: String): ContextPrompter {
             val langLowercase = lang.lowercase()
