@@ -7,7 +7,6 @@ import cc.unitmesh.devti.llms.LLMProvider
 import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
-import io.ktor.util.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ProducerScope
 import kotlinx.coroutines.channels.awaitClose
@@ -52,11 +51,15 @@ class XingHuoProvider(val project: Project) : LLMProvider {
     }
 
     override fun clearMessage() {
-        TODO()
+        //
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
+    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType, keepHistory: Boolean): Flow<String> {
+        if (!keepHistory) {
+            clearMessage()
+        }
+
         return callbackFlow {
             val client = OkHttpClient()
             client.newWebSocket(request, MyListener(this, onSocketOpen = {
@@ -159,4 +162,8 @@ class XingHuoProvider(val project: Project) : LLMProvider {
             }
         }""".trimIndent()
     }
+}
+
+private fun ByteArray.encodeBase64(): String {
+    return Base64.getEncoder().encodeToString(this)
 }

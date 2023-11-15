@@ -1,6 +1,7 @@
 package cc.unitmesh.devti.settings.configurable
 
 import cc.unitmesh.devti.AutoDevBundle
+import cc.unitmesh.devti.settings.helper.ToolchainPathChoosingComboBox
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 import com.intellij.openapi.options.BoundConfigurable
@@ -12,10 +13,8 @@ import com.intellij.ui.dsl.gridLayout.HorizontalAlign
 import javax.swing.JComponent
 import javax.swing.JTextField
 
-class CoUnitToolConfigurable(project: Project) :
-    BoundConfigurable(AutoDevBundle.message("settings.external.counit.name")), Disposable {
-
-    private val pathToToolchainComboBox = CoUnitToolchainPathChoosingComboBox()
+class CoUnitToolConfigurable(project: Project) : BoundConfigurable(AutoDevBundle.message("counit.name")), Disposable {
+    private val pathToToolchainComboBox = ToolchainPathChoosingComboBox()
     private val serverAddress = JTextField()
 
     val settings = project.service<CoUnitProjectSettingsServiceNew>()
@@ -23,12 +22,13 @@ class CoUnitToolConfigurable(project: Project) :
 
     override fun createPanel(): DialogPanel = panel {
         row {
-            checkBox(AutoDevBundle.message("settings.external.counit.enable.label"))
-                .comment(AutoDevBundle.message("settings.external.counit.enable.label.comment"))
+            checkBox(AutoDevBundle.message("counit.enable.label"))
+                .comment(AutoDevBundle.message("counit.enable.label.comment"))
                 .bindSelected(state::enableCoUnit)
         }
 
-        row(AutoDevBundle.message("settings.external.counit.server.address.label")) {
+        row(AutoDevBundle.message("counit.server.address.label")) {
+            // TODO: spike better way for support 213 and 221
             fullWidthCell(serverAddress)
                 .bind(
                     componentGet = { it.text },
@@ -37,7 +37,7 @@ class CoUnitToolConfigurable(project: Project) :
                 )
         }
 
-        row(AutoDevBundle.message("settings.external.counit.location.label")) {
+        row(AutoDevBundle.message("counit.location.label")) {
             fullWidthCell(pathToToolchainComboBox)
         }
 

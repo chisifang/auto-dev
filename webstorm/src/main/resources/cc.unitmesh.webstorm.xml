@@ -33,5 +33,7 @@
 
         <testContextProviderNew language="JavaScript" implementation="cc.unitmesh.ide.webstorm.provider.testing.JavaScriptWriteTestService"/>
         <testContextProviderNew language="Typescript" implementation="cc.unitmesh.ide.webstorm.provider.testing.JavaScriptWriteTestService"/>
+
+        <buildSystemProvider implementation="cc.unitmesh.ide.webstorm.provider.JavaScriptBuildSystemProvider" />
     </extensions>
 </idea-plugin>

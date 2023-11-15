@@ -7,7 +7,7 @@
 
     <extensions defaultExtensionNs="cc.unitmesh">
         <codeModifierNew language="kotlin"
-                      implementationClass="cc.unitmesh.kotlin.context.KotlinCodeModifier"/>
+                      implementationClass="cc.unitmesh.kotlin.provider.KotlinCodeModifier"/>
 
         <chatContextProviderNew implementation="cc.unitmesh.kotlin.provider.KotlinTestContextProvider"/>
 
@@ -34,5 +34,12 @@
         <testContextProviderNew
                 language="kotlin"
                 implementation="cc.unitmesh.kotlin.provider.KotlinWriteTestService"/>
+
+        <customPromptProvider
+                language="kotlin"
+                implementationClass="cc.unitmesh.kotlin.provider.KotlinCustomPromptProvider" />
+
+<!--        <buildSystemProvider-->
+<!--                implementation="cc.unitmesh.kotlin.provider.KotlinBuildSystemProvider"/>-->
     </extensions>
 </idea-plugin>

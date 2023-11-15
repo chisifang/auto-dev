@@ -1,7 +1,7 @@
 package cc.unitmesh.devti.llms.azure
 
-import cc.unitmesh.devti.custom.CustomPromptConfig
 import cc.unitmesh.devti.gui.chat.ChatActionType
+import cc.unitmesh.devti.custom.action.CustomPromptConfig
 import cc.unitmesh.devti.gui.chat.ChatRole
 import cc.unitmesh.devti.llms.LLMProvider
 import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
@@ -26,7 +26,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
-
 
 @Serializable
 data class SimpleOpenAIFormat(val role: String, val content: String) {
@@ -113,12 +112,13 @@ class AzureOpenAIProvider(val project: Project) : LLMProvider {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
+    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType, keepHistory: Boolean): Flow<String> {
         val promptText1 = "$promptText\n${""}"
         val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText1)
-        if (historyMessageLength > 8192) {
+        if (historyMessageLength > 8192 || !keepHistory) {
             messages.clear()
         }
+
         messages.add(SimpleOpenAIFormat.fromChatMessage(systemMessage))
         val openAIBody = SimpleOpenAIBody(
             messages,

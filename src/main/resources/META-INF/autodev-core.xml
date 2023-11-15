@@ -6,7 +6,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <notificationGroup id="AutoDev.notification.group.new" displayType="STICKY_BALLOON" bundle="messages.AutoDevBundle"
-                           key="notification.group.name"/>
+                           key="name"/>
 
         <applicationConfigurable parentId="tools" instance="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"
                                  id="cc.unitmesh.devti.settings.AutoDevSettingsConfigurableNew"
@@ -16,7 +16,13 @@
 <!--        <projectConfigurable provider="cc.unitmesh.devti.settings.configurable.CoUnitToolConfigurableProvider"-->
 <!--                             parentId="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"-->
 <!--                             id="cc.unitmesh.counit"-->
-<!--                             bundle="messages.AutoDevBundle" key="settings.external.counit.name"/>-->
+<!--                             bundle="messages.AutoDevBundle" key="counit.name"/>-->
+
+        <projectService serviceImplementation="cc.unitmesh.devti.settings.custom.TeamPromptsProjectSettingsService"/>
+        <projectConfigurable provider="cc.unitmesh.devti.settings.custom.TeamPromptsConfigurableProvider"
+                             parentId="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"
+                             id="cc.unitmesh.promptLibrary"
+                             bundle="messages.AutoDevBundle" key="settings.external.team.prompts.name"/>
 
         <applicationService serviceImplementation="cc.unitmesh.devti.settings.AutoDevSettingsStateNew"/>
 
@@ -39,20 +45,19 @@
                     factoryClass="cc.unitmesh.devti.gui.AutoDevToolWindowFactory"/>
 
         <notificationGroup id="AI notification group" displayType="STICKY_BALLOON" bundle="messages.AutoDevBundle"
-                           key="notification.group.name"/>
-
+                           key="name"/>
 
 <!--        <intentionAction>-->
 <!--            <className>cc.unitmesh.devti.intentions.AutoDevIntentionHelper</className>-->
 <!--            <categoryKey>intention.category.llm</categoryKey>-->
 <!--        </intentionAction>-->
 
-
         <highlightErrorFilter implementation="cc.unitmesh.devti.gui.snippet.error.CodeBlockHighlightErrorFilter"/>
         <daemon.highlightInfoFilter implementation="cc.unitmesh.devti.gui.snippet.error.CodeBlockHighlightingFilter"/>
         <defaultHighlightingSettingProvider
                 implementation="cc.unitmesh.devti.gui.snippet.error.CodeBlockHighlightingSettingsProvider"/>
-        <daemon.intentionActionFilter implementation="cc.unitmesh.devti.gui.snippet.error.CodeBlockIntentionActionFilter"/>
+        <daemon.intentionActionFilter
+                implementation="cc.unitmesh.devti.gui.snippet.error.CodeBlockIntentionActionFilter"/>
 
     </extensions>
 
@@ -96,6 +101,15 @@
         <extensionPoint qualifiedName="cc.unitmesh.livingDocumentationNew"
                         beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
             <with attribute="implementationClass" implements="cc.unitmesh.devti.provider.LivingDocumentation"/>
+        </extensionPoint>
+
+        <extensionPoint qualifiedName="cc.unitmesh.buildSystemProvider"
+                        interface="cc.unitmesh.devti.provider.BuildSystemProvider"
+                        dynamic="true"/>
+
+        <extensionPoint qualifiedName="cc.unitmesh.customPromptProvider"
+                        beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
+            <with attribute="implementationClass" implements="cc.unitmesh.devti.provider.CustomPromptProvider"/>
         </extensionPoint>
 
         <extensionPoint qualifiedName="cc.unitmesh.devFlowProviderNew"
@@ -151,6 +165,7 @@
 <!--            <add-to-group group-id="ShowIntentionsGroup" relative-to-action="ShowIntentionActions" anchor="after"/>-->
 <!--        </group>-->
 
+        <!-- For right click -->
         <group id="org.intellij.sdk.action.GroupedActionsNew" popup="true" text="Code Assistant" description="AutoDev chat">
             <action id="cc.unitmesh.devti.actions.chat.ChatBotExplainActionNew"
                     class="cc.unitmesh.devti.actions.chat.ChatBotExplainAction" text="解释选中代码"
@@ -181,6 +196,16 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
 
+<!--        <action id="cc.unitmesh.devti.QuickAssistant"-->
+<!--                class="cc.unitmesh.devti.actions.quick.QuickAssistantAction"-->
+<!--                text="Quick Assistant"-->
+<!--                description="You can custom any assistant as you want!"-->
+<!--        >-->
+<!--            <keyboard-shortcut keymap="$default" first-keystroke="control BACK_SLASH"/>-->
+
+<!--            <add-to-group group-id="ShowIntentionsGroup" relative-to-action="ShowIntentionActions" anchor="after"/>-->
+<!--        </action>-->
+
         <action id="cc.unitmesh.devti.actions.console.FixThisActionNew"
                 class="cc.unitmesh.devti.actions.console.FixThisAction" text="Fix This (AutoDev)"
                 description="Ask AI fi this code">
@@ -203,10 +228,19 @@
             <add-to-group group-id="Vcs.Log.ContextMenu" relative-to-action="Vcs.ShowDiffWithLocal" anchor="after"/>
         </action>
 
+        <action id="autodev.Vcs.CodeReview"
+                class="cc.unitmesh.devti.actions.vcs.CodeReviewAction" text="CodeReview (AutoDev)"
+                icon="cc.unitmesh.devti.AutoDevIcons.AI_COPILOT"
+                description="Ask AI to review code">
+
+            <add-to-group group-id="Vcs.Log.ChangesBrowser.Popup" relative-to-action="Vcs.RepositoryChangesBrowserMenu"
+                          anchor="after"/>
+            <add-to-group group-id="Vcs.Log.ContextMenu" relative-to-action="Vcs.ShowDiffWithLocal" anchor="after"/>
+        </action>
+
 <!--        <action id="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction"-->
 <!--                class="cc.unitmesh.devti.actions.chat.CodeCompleteChatAction" text="代码补全"-->
 <!--                description="Ask AI about this code">-->
-
 <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
 <!--        </action>-->
 
@@ -228,5 +262,12 @@
                     class="cc.unitmesh.devti.gui.chat.message.AutoDevRateMessageAction$Like"/>
         </group>
 
+        <group id="DevOpsGenius.NewActions" popup="true" icon="cc.unitmesh.devti.AutoDevIcons.AI_COPILOT">
+            <separator/>
+            <action id="GeniusDockerfile" class="cc.unitmesh.genius.actions.GenerateDockerfileAction"/>
+            <action id="GeniusGitHubActions" class="cc.unitmesh.genius.actions.GenerateGitHubActionsAction"/>
+
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </group>
     </actions>
 </idea-plugin>

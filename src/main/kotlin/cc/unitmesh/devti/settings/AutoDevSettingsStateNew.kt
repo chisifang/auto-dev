@@ -13,7 +13,7 @@ class AutoDevSettingsStateNew : PersistentStateComponent<AutoDevSettingsStateNew
     var gitlabToken = ""
     var gitlabUrl = ""
     var openAiKey = ""
-    var openAiModel = ""
+    var openAiModel = DEFAULT_AI_MODEL
     var delaySeconds = ""
 
     var aiEngine = DEFAULT_AI_ENGINE
@@ -33,19 +33,13 @@ class AutoDevSettingsStateNew : PersistentStateComponent<AutoDevSettingsStateNew
     var language = DEFAULT_HUMAN_LANGUAGE
     var maxTokenLength = MAX_TOKEN_LENGTH.toString()
 
-    fun fetchMaxTokenLength(): Int {
-        return maxTokenLength.toIntOrNull() ?: MAX_TOKEN_LENGTH
-    }
+    fun fetchMaxTokenLength(): Int = maxTokenLength.toIntOrNull() ?: MAX_TOKEN_LENGTH
 
     @Synchronized
-    override fun getState(): AutoDevSettingsStateNew {
-        return this
-    }
+    override fun getState(): AutoDevSettingsStateNew = this
 
     @Synchronized
-    override fun loadState(state: AutoDevSettingsStateNew) {
-        XmlSerializerUtil.copyBean(state, this)
-    }
+    override fun loadState(state: AutoDevSettingsStateNew) = XmlSerializerUtil.copyBean(state, this)
 
     companion object {
         val maxTokenLength: Int get() = getInstance().fetchMaxTokenLength()

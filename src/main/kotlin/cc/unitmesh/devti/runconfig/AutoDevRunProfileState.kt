@@ -5,7 +5,7 @@ import cc.unitmesh.devti.flow.kanban.Kanban
 import cc.unitmesh.devti.flow.kanban.impl.GitHubIssue
 import cc.unitmesh.devti.flow.kanban.impl.GitLabIssue
 import cc.unitmesh.devti.gui.sendToChatPanel
-import cc.unitmesh.devti.llms.LlmProviderFactory
+import cc.unitmesh.devti.llms.LlmFactory
 import cc.unitmesh.devti.provider.DevFlowProvider
 import cc.unitmesh.devti.runconfig.config.AutoDevConfiguration
 import cc.unitmesh.devti.runconfig.options.AutoDevConfigurationOptions
@@ -26,7 +26,7 @@ class AutoDevRunProfileState(
     val environment: ExecutionEnvironment,
     private val configuration: AutoDevConfiguration,
     val project: Project,
-    val options: AutoDevConfigurationOptions
+    val options: AutoDevConfigurationOptions,
 ) : RunProfileState {
     private val githubToken: String
     private val gitlabToken: String
@@ -42,11 +42,19 @@ class AutoDevRunProfileState(
     }
 
     override fun execute(executor: Executor?, runner: ProgramRunner<*>): ExecutionResult? {
-        val gitHubIssue : Kanban
-        if ("Github" == gitType) {
-            gitHubIssue = GitHubIssue(options.githubRepo(), githubToken)
-        } else {
-            gitHubIssue = GitLabIssue(options.githubRepo(), gitlabToken, gitlabUrl)
+        val gitHubIssue: Kanban
+        when (gitType.lowercase()) {
+            "gitlab" -> {
+                gitHubIssue = GitLabIssue(options.githubRepo(), gitlabToken, gitlabUrl)
+            }
+
+            "github" -> {
+                gitHubIssue = GitHubIssue(options.githubRepo(), githubToken)
+            }
+
+            else -> {
+                gitHubIssue = GitHubIssue(options.githubRepo(), githubToken)
+            }
         }
 
 
@@ -56,7 +64,7 @@ class AutoDevRunProfileState(
             logger.error("current Language don't implementation DevFlow")
             return null
         }
-        val openAIRunner = LlmProviderFactory().connector(project)
+        val openAIRunner = LlmFactory().create(project)
 
         sendToChatPanel(project) { contentPanel, _ ->
             flowProvider.initContext(gitHubIssue, openAIRunner, contentPanel, project)

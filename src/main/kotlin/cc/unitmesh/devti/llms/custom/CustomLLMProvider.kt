@@ -1,7 +1,7 @@
 package cc.unitmesh.devti.llms.custom
 
-import cc.unitmesh.devti.custom.CustomPromptConfig
 import cc.unitmesh.devti.gui.chat.ChatActionType
+import cc.unitmesh.devti.custom.action.CustomPromptConfig
 import cc.unitmesh.devti.gui.chat.ChatRole
 import cc.unitmesh.devti.llms.LLMProvider
 import cc.unitmesh.devti.settings.AutoDevSettingsStateNew
@@ -66,9 +66,12 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
         // 不做多轮对话，清空历史对话
-        this.clearMessage();
+    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType, keepHistory: Boolean): Flow<String> {
+        if (!keepHistory) {
+            clearMessage()
+        }
+
         messages += Message("user", promptText)
 
         val customRequest = CustomRequest(messages)
@@ -128,7 +131,7 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
 
     private fun getUrl(action: ChatActionType): String {
         var path = "/generate"
-        when (action!!) {
+        when (action) {
             ChatActionType.EXPLAIN -> {
                 path = "/api/explain"
             }
@@ -150,6 +153,8 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
             ChatActionType.CUSTOM_COMPLETE -> {}
             ChatActionType.CUSTOM_ACTION -> {}
             ChatActionType.COUNIT -> {}
+            ChatActionType.CREATE_GENIUS -> {}
+            ChatActionType.CODE_REVIEW -> {}
         }
 
         return url + path

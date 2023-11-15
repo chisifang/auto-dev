@@ -1,6 +1,7 @@
 package cc.unitmesh.devti.custom
 
-import cc.unitmesh.devti.custom.task.CustomLivingDocTask
+import cc.unitmesh.devti.custom.document.CustomDocumentationConfig
+import cc.unitmesh.devti.custom.document.CustomLivingDocTask
 import cc.unitmesh.devti.intentions.action.base.BasedDocumentationIntention
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.progress.ProgressManager
@@ -22,8 +23,7 @@ class CustomDocumentationIntention(override val config: CustomDocumentationConfi
     }
 
     companion object {
-        fun create(it: CustomDocumentationConfig): CustomDocumentationIntention {
-            return CustomDocumentationIntention(it)
-        }
+        fun create(config: CustomDocumentationConfig): CustomDocumentationIntention =
+            CustomDocumentationIntention(config)
     }
 }

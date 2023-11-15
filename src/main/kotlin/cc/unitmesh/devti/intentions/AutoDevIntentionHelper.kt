@@ -2,16 +2,10 @@ package cc.unitmesh.devti.intentions
 
 import cc.unitmesh.devti.AutoDevBundle
 import cc.unitmesh.devti.AutoDevIcons
-import cc.unitmesh.devti.custom.CustomDocumentationIntention
-import cc.unitmesh.devti.custom.CustomIntention
 import cc.unitmesh.devti.intentions.ui.CustomPopupStep
-import cc.unitmesh.devti.custom.CustomPromptConfig
-import cc.unitmesh.devti.intentions.action.base.AbstractChatIntention
 import com.intellij.codeInsight.intention.IntentionAction
-import com.intellij.codeInsight.intention.IntentionActionBean
 import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.extensions.ExtensionPointName
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.util.Iconable
@@ -32,7 +26,7 @@ class AutoDevIntentionHelper : IntentionAction, Iconable {
     }
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
-        val intentions = getAiAssistantIntentions(project, editor, file)
+        val intentions = IntentionHelperUtil.getAiAssistantIntentions(project, editor, file)
 
         val title = AutoDevBundle.message("intentions.assistant.popup.title")
         val popupStep = CustomPopupStep(intentions, project, editor, file, title)
@@ -42,30 +36,4 @@ class AutoDevIntentionHelper : IntentionAction, Iconable {
         popup.showInBestPositionFor(editor)
     }
 
-    companion object {
-        val EP_NAME: ExtensionPointName<IntentionActionBean> =
-            ExtensionPointName<IntentionActionBean>("cc.unitmesh.autoDevIntentionNew")
-
-        fun getAiAssistantIntentions(project: Project, editor: Editor, file: PsiFile): List<IntentionAction> {
-            val extensionList = EP_NAME.extensionList
-
-            val builtinIntentions = extensionList
-                .asSequence()
-                .map { (it as IntentionActionBean).instance }
-                .filter { it.isAvailable(project, editor, file) }
-                .toList()
-
-            val promptConfig = CustomPromptConfig.load()
-            val customIntentions: List<IntentionAction> = promptConfig.prompts.map {
-                CustomIntention.create(it)
-            }
-
-            val livingDocIntentions: List<IntentionAction> = promptConfig.documentations?.map {
-                CustomDocumentationIntention.create(it)
-            } ?: emptyList()
-
-            val actionList = builtinIntentions + customIntentions + livingDocIntentions
-            return actionList.map { it as AbstractChatIntention }.sortedByDescending { it.priority() }
-        }
-    }
 }

@@ -4,7 +4,7 @@ import cc.unitmesh.devti.AutoDevBundle
 import cc.unitmesh.devti.context.modifier.CodeModifierProvider
 import cc.unitmesh.devti.gui.chat.ChatActionType
 import cc.unitmesh.devti.intentions.action.AutoTestThisIntention
-import cc.unitmesh.devti.llms.LlmProviderFactory
+import cc.unitmesh.devti.llms.LlmFactory
 import cc.unitmesh.devti.parser.parseCodeFromString
 import cc.unitmesh.devti.provider.WriteTestService
 import cc.unitmesh.devti.provider.context.TestFileContext
@@ -27,6 +27,7 @@ import kotlinx.coroutines.runBlocking
 
 class TestCodeGenTask(val request: TestCodeGenRequest) :
     Task.Backgroundable(request.project, AutoDevBundle.message("intentions.chat.code.test.name")) {
+
     private val actionType = ChatActionType.GENERATE_TEST
     private val lang = request.file.language.displayName
     private val writeTestService = WriteTestService.context(request.element)
@@ -52,12 +53,12 @@ class TestCodeGenTask(val request: TestCodeGenRequest) :
         var prompter = if (testContext.isNewFile) {
             """Write unit test for following code. 
                                     |You MUST return code only, not explain.
-                                    | """.trimMargin()
+                                    |""".trimMargin()
         } else {
             """Write unit test for following code. 
                                     |You MUST return method code only, no explain.
                                     |You MUST return start with @Test annotation.
-                                    | """.trimMargin()
+                                    |""".trimMargin()
         }
 
         indicator.text = AutoDevBundle.message("intentions.chat.code.test.step.collect-context")
@@ -103,7 +104,7 @@ class TestCodeGenTask(val request: TestCodeGenRequest) :
         }
 
         val flow: Flow<String> =
-            LlmProviderFactory().connector(request.project).stream(prompter, "", ChatActionType.CHAT)
+            LlmFactory().create(request.project).stream(prompter, "", ChatActionType.CHAT)
 
         logger<AutoTestThisIntention>().info("Prompt: $prompter")
 

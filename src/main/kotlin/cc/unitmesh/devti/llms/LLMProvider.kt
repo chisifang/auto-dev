@@ -11,7 +11,7 @@ interface LLMProvider {
     fun prompt(promptText: String): String
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
+    fun stream(promptText: String, systemPrompt: String, action: ChatActionType, keepHistory: Boolean = true): Flow<String> {
         return callbackFlow {
             val prompt = prompt(promptText)
             trySend(prompt)

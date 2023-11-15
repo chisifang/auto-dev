@@ -1,6 +1,6 @@
 package cc.unitmesh.kotlin.provider
 
-import cc.unitmesh.devti.custom.LivingDocumentationType
+import cc.unitmesh.devti.custom.document.LivingDocumentationType
 import cc.unitmesh.devti.provider.LivingDocumentation
 import com.intellij.codeInsight.daemon.impl.CollectHighlightsUtil
 import com.intellij.openapi.command.WriteCommandAction
@@ -146,20 +146,15 @@ class KotlinLivingDocumentation : LivingDocumentation {
         selectionModel: SelectionModel,
     ): List<PsiNameIdentifierOwner> {
         val commonParent: PsiElement? =
-            CollectHighlightsUtil.findCommonParent(
-                root,
-                selectionModel.selectionStart,
-                selectionModel.selectionEnd
-            )
+            CollectHighlightsUtil.findCommonParent(root, selectionModel.selectionStart, selectionModel.selectionEnd)
+
         if (commonParent is KtFile) {
             return filterAndCollectNameIdentifierOwners(commonParent.getDeclarations(), selectionModel)
         }
 
         val nearestDocumentationTarget = findNearestDocumentationTarget(commonParent!!)
-        if (nearestDocumentationTarget !is KtClassOrObject || containsElement(
-                selectionModel,
-                nearestDocumentationTarget
-            )
+        if (nearestDocumentationTarget !is KtClassOrObject ||
+            containsElement(selectionModel, nearestDocumentationTarget)
         ) {
             return listOf(nearestDocumentationTarget!!)
         }
@@ -185,6 +180,7 @@ class KotlinLivingDocumentation : LivingDocumentation {
         if (closestIdentifierOwner !is KtNamedFunction) {
             return PsiTreeUtil.getParentOfType(psiElement, KtNamedFunction::class.java) ?: closestIdentifierOwner
         }
+
         return closestIdentifierOwner
     }
 }

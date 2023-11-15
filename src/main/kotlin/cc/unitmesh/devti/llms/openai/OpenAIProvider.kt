@@ -59,7 +59,7 @@ class OpenAIProvider(val project: Project) : LLMProvider {
         get() = AutoDevSettingsStateNew.getInstance().openAiKey
 
     private val maxTokenLength: Int
-        get() = AutoDevSettingsStateNew.maxTokenLength
+        get() = AutoDevSettingsStateNew.getInstance().fetchMaxTokenLength()
 
     private val messages: MutableList<ChatMessage> = ArrayList()
     private var historyMessageLength: Int = 0
@@ -85,7 +85,11 @@ class OpenAIProvider(val project: Project) : LLMProvider {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType): Flow<String> {
+    override fun stream(promptText: String, systemPrompt: String, action: ChatActionType, keepHistory: Boolean): Flow<String> {
+        if (!keepHistory) {
+            clearMessage()
+        }
+
         val completionRequest = prepareRequest(promptText, systemPrompt)
 
         return callbackFlow {
@@ -96,9 +100,11 @@ class OpenAIProvider(val project: Project) : LLMProvider {
                         trySend(error.message ?: "Error occurs")
                     }
                     .blockingForEach { response ->
-                        val completion = response.choices[0].message
-                        if (completion != null && completion.content != null) {
-                            trySend(completion.content)
+                        if (response.choices.isNotEmpty()) {
+                            val completion = response.choices[0].message
+                            if (completion != null && completion.content != null) {
+                                trySend(completion.content)
+                            }
                         }
                     }
 
