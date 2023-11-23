@@ -13,7 +13,7 @@ import com.intellij.ui.content.ContentFactory
 
 class AutoDevToolWindowFactory : ToolWindowFactory, DumbAware {
     object Util {
-        const val id = "CodeAssistant"
+        const val id = "CICC-CodeAssistant"
     }
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
@@ -21,7 +21,7 @@ class AutoDevToolWindowFactory : ToolWindowFactory, DumbAware {
         val chatCodingService = ChatCodingService(ChatActionType.CHAT, project)
         val contentPanel = ChatCodingPanel(chatCodingService, disposable)
         val content =
-            ContentFactory.getInstance()
+            ContentFactory.SERVICE.getInstance()
                 .createContent(contentPanel, AutoDevBundle.message("autodev.chat"), false)
         toolWindow.contentManager.addContent(content)
     }

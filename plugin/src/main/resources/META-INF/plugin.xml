@@ -1,16 +1,16 @@
 <idea-plugin package="cc.unitmesh" xmlns:xi="http://www.w3.org/2001/XInclude" allow-bundled-update="true">
     <id>com.code.assistant.ctie</id>
-    <name>CodeAssistant</name>
-    <vendor>ctie</vendor>
+    <name>CICC-CodeAssistant</name>
+    <vendor>CTIE</vendor>
 
     <description><![CDATA[
-        CodeAssistant
+        CICC-CodeAssistant
     ]]></description>
 
-    <change-notes><![CDATA[
-        CodeAssistant
-    ]]>
-    </change-notes>
+<!--    <change-notes><![CDATA[-->
+<!--        CICC-CodeAssistant-->
+<!--    ]]>-->
+<!--    </change-notes>-->
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->

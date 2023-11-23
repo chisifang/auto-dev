@@ -22,7 +22,7 @@
 //SOFTWARE.
 
 import groovy.xml.XmlParser
-import org.gradle.api.JavaVersion.VERSION_17
+import org.gradle.api.JavaVersion.VERSION_11
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.intellij.tasks.PatchPluginXmlTask
 import org.jetbrains.intellij.tasks.PublishPluginTask
@@ -127,14 +127,14 @@ allprojects {
     }
 
     configure<JavaPluginExtension> {
-        sourceCompatibility = VERSION_17
-        targetCompatibility = VERSION_17
+        sourceCompatibility = VERSION_11
+        targetCompatibility = VERSION_11
     }
 
     tasks {
         withType<KotlinCompile> {
             kotlinOptions {
-                jvmTarget = VERSION_17.toString()
+                jvmTarget = VERSION_11.toString()
                 languageVersion = "1.8"
                 // see https://plugins.jetbrains.com/docs/intellij/using-kotlin.html#kotlin-standard-library
                 apiVersion = "1.7"
@@ -302,7 +302,7 @@ project(":plugin") {
             // jvmArgs("-Didea.ProcessCanceledException=disabled")
         }
 
-//        withType<PatchPluginXmlTask> {
+        withType<PatchPluginXmlTask> {
 //            pluginDescription.set(provider { file("description.html").readText() })
 //
 //            changelog {
@@ -325,15 +325,15 @@ project(":plugin") {
 //                    )
 //                }
 //            });
-//        }
-
-        withType<PublishPluginTask> {
-            dependsOn("patchChangelog")
-            token.set(environment("PUBLISH_TOKEN"))
-            channels.set(properties("pluginVersion").map {
-                listOf(it.split('-').getOrElse(1) { "default" }.split('.').first())
-            })
         }
+
+//        withType<PublishPluginTask> {
+//            dependsOn("patchChangelog")
+//            token.set(environment("PUBLISH_TOKEN"))
+//            channels.set(properties("pluginVersion").map {
+//                listOf(it.split('-').getOrElse(1) { "default" }.split('.').first())
+//            })
+//        }
     }
 }
 

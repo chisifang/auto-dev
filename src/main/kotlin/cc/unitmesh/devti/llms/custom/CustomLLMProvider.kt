@@ -66,11 +66,12 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-        // 不做多轮对话，清空历史对话
     override fun stream(promptText: String, systemPrompt: String, action: ChatActionType, keepHistory: Boolean): Flow<String> {
-        if (!keepHistory) {
-            clearMessage()
-        }
+        // 不做多轮对话，清空历史对话
+        clearMessage();
+//        if (!keepHistory) {
+//            clearMessage()
+//        }
 
         messages += Message("user", promptText)
 
@@ -155,6 +156,7 @@ class CustomLLMProvider(val project: Project) : LLMProvider {
             ChatActionType.COUNIT -> {}
             ChatActionType.CREATE_GENIUS -> {}
             ChatActionType.CODE_REVIEW -> {}
+            ChatActionType.GENERATE_TEST_DATA -> {}
         }
 
         return url + path

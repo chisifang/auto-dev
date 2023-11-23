@@ -30,7 +30,7 @@
         <contextPrompterNew
                 language="JAVA"
                 implementation="cc.unitmesh.idea.prompting.JavaContextPrompter"/>
-        <contextPrompterNew
+        <devFlowProviderNew
                 language="JAVA"
                 implementation="cc.unitmesh.idea.flow.JvmAutoDevFlow"/>
         <promptStrategyNew

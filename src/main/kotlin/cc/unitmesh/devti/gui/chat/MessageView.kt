@@ -39,8 +39,8 @@ class MessageView(private val message: String, val role: ChatRole, private val d
         authorLabel.setFont(JBFont.h4())
         authorLabel.setText(when (role) {
             ChatRole.System -> "System"
-            ChatRole.Assistant -> "Assistant"
-            ChatRole.User -> "User"
+            ChatRole.Assistant -> "输出"
+            ChatRole.User -> "输入"
         })
         myNameLabel = authorLabel
 

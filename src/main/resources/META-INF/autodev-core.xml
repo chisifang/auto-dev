@@ -10,7 +10,7 @@
 
         <applicationConfigurable parentId="tools" instance="cc.unitmesh.devti.settings.AutoDevSettingsConfigurable"
                                  id="cc.unitmesh.devti.settings.AutoDevSettingsConfigurableNew"
-                                 displayName="CodeAssistant"/>
+                                 displayName="CICC-CodeAssistant"/>
 
         <projectService serviceImplementation="cc.unitmesh.devti.settings.configurable.CoUnitProjectSettingsServiceNew"/>
 <!--        <projectConfigurable provider="cc.unitmesh.devti.settings.configurable.CoUnitToolConfigurableProvider"-->
@@ -36,7 +36,7 @@
         <!-- Run Configurations -->
         <programRunner implementation="cc.unitmesh.devti.runconfig.AutoDevCommandRunner"/>
 
-        <toolWindow id="CodeAssistant"
+        <toolWindow id="CICC-CodeAssistant"
                     doNotActivateOnStart="true"
                     anchor="right"
                     secondary="true"
@@ -166,7 +166,7 @@
 <!--        </group>-->
 
         <!-- For right click -->
-        <group id="org.intellij.sdk.action.GroupedActionsNew" popup="true" text="Code Assistant" description="AutoDev chat">
+        <group id="org.intellij.sdk.action.GroupedActionsNew" popup="true" text="CICC-CodeAssistant" description="AutoDev chat">
             <action id="cc.unitmesh.devti.actions.chat.ChatBotExplainActionNew"
                     class="cc.unitmesh.devti.actions.chat.ChatBotExplainAction" text="解释选中代码"
                     description="Ask AI about this code">
@@ -193,10 +193,10 @@
                     description="Ask AI write this code">
             </action>
 
-            <action id="cc.unitmesh.devti.actions.chat.GenTestDataAction"
-                    class="cc.unitmesh.devti.actions.chat.GenTestDataAction" text="Generate Test data (APIs)"
-                    description="Ask AI write this code">
-            </action>
+<!--            <action id="cc.unitmesh.devti.actions.chat.GenTestDataAction"-->
+<!--                    class="cc.unitmesh.devti.actions.chat.GenTestDataAction" text="Generate Test data (APIs)"-->
+<!--                    description="Ask AI write this code">-->
+<!--            </action>-->
 
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
